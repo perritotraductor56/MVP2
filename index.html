@@ -12,30 +12,28 @@
     <style>
         /* Variables de Diseño: Filosofía Slow AI / Crítica Ecosistémica */
         :root {
-            --bg-color: #F7F5F0;       /* Crema / Arena (30% Fondos y Calidez) */
-            --text-main: #1C2821;      /* Verde Bosque (Texto y Jerarquía Principal) */
-            --text-muted: #4A5D53;     /* Verde Oliva Suave para textos secundarios */
-            --accent: #E5A93B;         /* Amarillo Mostaza (10% Destacados y Alertas) */
-            --structure: #2A3E34;      /* Verde Oliva Oscuro (60% Bloques y Estructura) */
-            --card-bg: #EFECE3;        /* Tono pergamino sutil para tarjetas */
-            --border-color: #D3CFC4;   /* Bordes orgánicos degradados */
+            --bg-color: #F7F5F0;       
+            --text-main: #1C2821;      
+            --text-muted: #4A5D53;     
+            --accent: #E5A93B;         
+            --structure: #2A3E34;      
+            --card-bg: #EFECE3;        
+            --border-color: #D3CFC4;   
             --nav-bg: rgba(247, 245, 240, 0.95);
             
-            /* Identidad de Integrantes (Mantenemos los acentos funcionales) */
             --ana-color: #2A3E34;
             --abel-color: #e11d48;
             --rafa-color: #059669;
         }
 
-        /* Inversión Armónica para Modo Oscuro Profundo */
         [data-theme="dark"] {
-            --bg-color: #131B17;       /* Fondo ultra profundo forestal */
-            --text-main: #F7F5F0;      /* Texto crema */
-            --text-muted: #A3B5AB;     /* Textos secundarios claros */
-            --accent: #E5A93B;         /* Mantiene el mostaza radiante */
-            --structure: #2A3E34;      /* Estructuras base */
-            --card-bg: #1C2821;        /* Tarjetas verde bosque oscuro */
-            --border-color: #354A3E;   /* Bordes nocturnos */
+            --bg-color: #131B17;       
+            --text-main: #F7F5F0;      
+            --text-muted: #A3B5AB;     
+            --accent: #E5A93B;         
+            --structure: #2A3E34;      
+            --card-bg: #1C2821;        
+            --border-color: #354A3E;   
             --nav-bg: rgba(19, 27, 23, 0.95);
         }
 
@@ -52,7 +50,6 @@
             overflow-x: hidden;
         }
 
-        /* Sistema de Navegación SPA Fijo */
         .navbar {
             position: fixed; top: 0; width: 100%; padding: 1.2rem 2rem;
             background-color: var(--nav-bg); backdrop-filter: blur(12px);
@@ -70,7 +67,7 @@
         }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-        .controls { display: flex; gap: 1rem; }
+        .controls { display: flex; gap: 1rem; align-items: center; }
         .ctrl-btn {
             background: transparent; border: 2px solid var(--border-color);
             color: var(--text-main); padding: 0.5rem 1.2rem; border-radius: 30px;
@@ -78,18 +75,24 @@
         }
         .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* Contenedor de Vistas SPA */
+        /* Botón de Menú Hamburguesa (Oculto en Desktop) */
+        .hamburger { 
+            display: none; background: transparent; border: none; 
+            font-size: 1.5rem; color: var(--structure); cursor: pointer; 
+            margin-left: 0.5rem; transition: color 0.3s; 
+        }
+        [data-theme="dark"] .hamburger { color: var(--accent); }
+
         .view-section {
             display: none; 
             opacity: 0; transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             min-height: 100vh; padding-top: 6rem;
-            position: relative; /* Agregado para contener la imagen de fondo */
-            z-index: 1; /* Agregado para que no haya conflictos de superposición */
+            position: relative; 
+            z-index: 1; 
         }
         .view-section.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* === CONFIGURACIÓN DE IMAGEN DE FONDO (Solo en "Sobre Nosotros") === */
         #view-about::before {
             content: '';
             position: absolute;
@@ -97,13 +100,12 @@
             background-image: url('images/backgroundaboutus.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efecto anclado al hacer scroll */
-            opacity: 0.3; /* Opacidad solicitada */
-            z-index: -1; /* Mantiene la imagen detrás de las tarjetas y el texto */
-            pointer-events: none; /* Evita que la imagen interfiera con los clics */
+            background-attachment: fixed; 
+            opacity: 0.3; 
+            z-index: -1; 
+            pointer-events: none; 
         }
 
-        /* Componentes Comunes: Botones con Acento Mostaza */
         .btn {
             padding: 1rem 2.2rem; font-size: 1rem; font-family: inherit; font-weight: 700;
             color: #1C2821 !important; background-color: var(--accent); border: none;
@@ -116,7 +118,6 @@
             box-shadow: 0 10px 25px rgba(229, 169, 59, 0.4);
         }
 
-        /* --- ESTILOS: VISTA INICIO (HOME) --- */
         .hero {
             text-align: center; padding: 6rem 2rem 4rem;
             background: radial-gradient(circle at center, var(--card-bg) 0%, var(--bg-color) 70%);
@@ -141,7 +142,6 @@
         .solution-bar h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; color: var(--accent); }
         .solution-bar p { max-width: 800px; margin: 0 auto 2rem; font-size: 1.15rem; opacity: 0.9; }
 
-        /* --- ESTILOS: VISTA BLOG --- */
         .blog-header { text-align: center; padding: 3rem 2rem; }
         .blog-header h1 { font-size: 2.8rem; color: var(--structure); margin-bottom: 0.5rem; }
         [data-theme="dark"] .blog-header h1 { color: #ffffff; }
@@ -166,7 +166,6 @@
         .blog-link { font-weight: 700; color: var(--structure); display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; }
         [data-theme="dark"] .blog-link { color: var(--accent); }
 
-        /* --- ESTILOS: VISTA SOBRE NOSOTROS --- */
         .team-header { text-align: center; padding: 3rem 2rem; }
         .team-header h1 { font-size: 2.8rem; color: var(--structure); }
         [data-theme="dark"] .team-header h1 { color: #ffffff; }
@@ -183,7 +182,6 @@
         .team-role { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; color: var(--text-muted); }
         .team-bio { color: var(--text-main); font-size: 0.95rem; text-align: justify; line-height: 1.6; }
         
-        /* Efectos de Hover Personalizados */
         .card-ana:hover { border-color: var(--ana-color); box-shadow: 0 15px 30px rgba(42, 62, 52, 0.15); }
         .card-ana:hover .profile-img-container { border-color: var(--ana-color); }
         .card-ana:hover .team-role { color: var(--ana-color); }
@@ -196,17 +194,26 @@
         .card-rafa:hover .profile-img-container { border-color: var(--rafa-color); }
         .card-rafa:hover .team-role { color: var(--rafa-color); }
 
-        /* Modales Interactivos */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(28, 40, 33, 0.6); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
         .modal-content { background: var(--bg-color); padding: 3rem; border-radius: 16px; text-align: center; max-width: 480px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .close-btn { margin-top: 2rem; background: transparent; border: 2px solid var(--text-main); color: var(--text-main); }
         .close-btn:hover { background: var(--text-main); color: var(--bg-color); box-shadow: none; }
 
-        /* Responsividad Móvil */
+        /* Ajustes y Menú Móvil */
         @media (max-width: 992px) {
             .team-container { grid-template-columns: 1fr; padding: 2rem; gap: 3rem; }
             .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; } 
+            
+            .hamburger { display: block; } /* Mostrar botón menú */
+            .nav-links { 
+                display: none; 
+                position: absolute; top: 100%; left: 0; width: 100%; 
+                background-color: var(--nav-bg); flex-direction: column; 
+                padding: 1.5rem; text-align: center; gap: 1.5rem; 
+                border-bottom: 1px solid var(--border-color); 
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            }
+            .nav-links.show { display: flex; } /* Mostrar cuando tenga la clase activa */
         }
     </style>
 </head>
@@ -214,14 +221,17 @@
 
     <nav class="navbar">
         <a href="#" class="logo" onclick="switchView('home')">OIA.</a>
+        
         <ul class="nav-links">
             <li><a href="#" id="nav-home" class="active" onclick="switchView('home')" data-i18n="nav_home">Inicio</a></li>
             <li><a href="#" id="nav-blog" onclick="switchView('blog')" data-i18n="nav_blog">Blog</a></li>
             <li><a href="#" id="nav-about" onclick="switchView('about')" data-i18n="nav_about">Sobre nosotros</a></li>
         </ul>
+        
         <div class="controls">
             <button class="ctrl-btn" onclick="toggleLang()" id="langBtn">ENG</button>
             <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+            <button class="hamburger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
         </div>
     </nav>
 
@@ -339,6 +349,11 @@
     </div>
 
     <script>
+        // Función para Menú Móvil
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+
         // --- 1. Enrutador SPA ---
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
@@ -348,6 +363,10 @@
             if(document.getElementById(`nav-${viewName}`)) {
                 document.getElementById(`nav-${viewName}`).classList.add('active');
             }
+            
+            // Oculta el menú en pantallas móviles después de seleccionar una opción
+            document.querySelector('.nav-links').classList.remove('show');
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -379,7 +398,7 @@
                 desc_2: "¿Es posible resistir a la gobernanza algorítmica? Comparto este seminario de posgrado de CLACSO que analiza de forma crítica el impacto socio-técnico de la IA a través de debates sobre datificación social, plataformas y control digital.",
                 tag_3: "Proyecto",
                 title_3: "Slow AI: Diseñando una inteligencia artificial más humana, ética y pausada.",
-                desc_3: "En un mundo obsesionado con la velocidad y la automatización extrema, surge \"Slow AI\". Este proyecto de AIxDesign propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.",
+                desc_3: "En un mundo obsesionado con la velocidad y la automatización extrema, surge \"Slow AI\". Este proyecto propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.",
                 read_more: "Explorar recurso",
                 team_header_title: "Nuestro Equipo",
                 team_header_desc: "Las mentes detrás del Observatorio Universitario de Inteligencia Artificial y Cultura Digital.",
