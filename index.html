@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Observatorio de Inteligencia Artificial y Cultura Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables de Diseño: Filosofía Slow AI / Crítica Ecosistémica */
+        :root {
+            --bg-color: #F7F5F0;       /* Crema / Arena (30% Fondos y Calidez) */
+            --text-main: #1C2821;      /* Verde Bosque (Texto y Jerarquía Principal) */
+            --text-muted: #4A5D53;     /* Verde Oliva Suave para textos secundarios */
+            --accent: #E5A93B;         /* Amarillo Mostaza (10% Destacados y Alertas) */
+            --structure: #2A3E34;      /* Verde Oliva Oscuro (60% Bloques y Estructura) */
+            --card-bg: #EFECE3;        /* Tono pergamino sutil para tarjetas */
+            --border-color: #D3CFC4;   /* Bordes orgánicos degradados */
+            --nav-bg: rgba(247, 245, 240, 0.95);
+            
+            /* Identidad de Integrantes (Mantenemos los acentos funcionales) */
+            --ana-color: #2A3E34;
+            --abel-color: #e11d48;
+            --rafa-color: #059669;
+        }
+
+        /* Inversión Armónica para Modo Oscuro Profundo */
+        [data-theme="dark"] {
+            --bg-color: #131B17;       /* Fondo ultra profundo forestal */
+            --text-main: #F7F5F0;      /* Texto crema */
+            --text-muted: #A3B5AB;     /* Textos secundarios claros */
+            --accent: #E5A93B;         /* Mantiene el mostaza radiante */
+            --structure: #2A3E34;      /* Estructuras base */
+            --card-bg: #1C2821;        /* Tarjetas verde bosque oscuro */
+            --border-color: #354A3E;   /* Bordes nocturnos */
+            --nav-bg: rgba(19, 27, 23, 0.95);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Sistema de Navegación SPA Fijo */
+        .navbar {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 2rem;
+            background-color: var(--nav-bg); backdrop-filter: blur(12px);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo { font-weight: 900; font-size: 1.3rem; color: var(--structure); text-decoration: none; letter-spacing: 1px; }
+        [data-theme="dark"] .logo { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-main); font-weight: 600; 
+            font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .controls { display: flex; gap: 1rem; }
+        .ctrl-btn {
+            background: transparent; border: 2px solid var(--border-color);
+            color: var(--text-main); padding: 0.5rem 1.2rem; border-radius: 30px;
+            cursor: pointer; font-family: inherit; font-weight: 700; transition: all 0.3s;
+        }
+        .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* Contenedor de Vistas SPA */
+        .view-section {
+            display: none; 
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            min-height: 100vh; padding-top: 6rem;
+            position: relative; /* Agregado para contener la imagen de fondo */
+            z-index: 1; /* Agregado para que no haya conflictos de superposición */
+        }
+        .view-section.active { display: block; opacity: 1; transform: translateY(0); }
+
+        /* === CONFIGURACIÓN DE IMAGEN DE FONDO (Solo en "Sobre Nosotros") === */
+        #view-about::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/backgroundaboutus.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto anclado al hacer scroll */
+            opacity: 0.3; /* Opacidad solicitada */
+            z-index: -1; /* Mantiene la imagen detrás de las tarjetas y el texto */
+            pointer-events: none; /* Evita que la imagen interfiera con los clics */
+        }
+
+        /* Componentes Comunes: Botones con Acento Mostaza */
+        .btn {
+            padding: 1rem 2.2rem; font-size: 1rem; font-family: inherit; font-weight: 700;
+            color: #1C2821 !important; background-color: var(--accent); border: none;
+            border-radius: 50px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+            box-shadow: 0 4px 15px rgba(229, 169, 59, 0.2);
+        }
+        .btn:hover {
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(229, 169, 59, 0.4);
+        }
+
+        /* --- ESTILOS: VISTA INICIO (HOME) --- */
+        .hero {
+            text-align: center; padding: 6rem 2rem 4rem;
+            background: radial-gradient(circle at center, var(--card-bg) 0%, var(--bg-color) 70%);
+        }
+        .hero h1 { font-size: 3.2rem; max-width: 950px; margin: 0 auto 2rem; line-height: 1.2; color: var(--structure); }
+        [data-theme="dark"] .hero h1 { color: #ffffff; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem; }
+
+        .grid-home { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .card-home {
+            background-color: var(--card-bg); padding: 3rem 2rem; border-radius: 16px;
+            border: 1px solid var(--border-color); transition: all 0.4s ease;
+        }
+        .card-home:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(42, 62, 52, 0.08); }
+        .card-home i { font-size: 2.5rem; color: var(--structure); margin-bottom: 1.5rem; transition: color 0.3s; }
+        [data-theme="dark"] .card-home i { color: var(--accent); }
+        .card-home h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--structure); }
+        [data-theme="dark"] .card-home h3 { color: #ffffff; }
+        .card-home p { color: var(--text-muted); }
+
+        .solution-bar { background-color: var(--structure); color: #F7F5F0; padding: 6rem 2rem; text-align: center; margin-top: 4rem; }
+        .solution-bar h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; color: var(--accent); }
+        .solution-bar p { max-width: 800px; margin: 0 auto 2rem; font-size: 1.15rem; opacity: 0.9; }
+
+        /* --- ESTILOS: VISTA BLOG --- */
+        .blog-header { text-align: center; padding: 3rem 2rem; }
+        .blog-header h1 { font-size: 2.8rem; color: var(--structure); margin-bottom: 0.5rem; }
+        [data-theme="dark"] .blog-header h1 { color: #ffffff; }
+        .blog-container { max-width: 750px; margin: 0 auto; padding: 2rem; }
+        .blog-card {
+            background-color: var(--card-bg); border-radius: 12px; overflow: hidden;
+            margin-bottom: 4rem; border: 1px solid var(--border-color); display: flex; flex-direction: column;
+            text-decoration: none; color: inherit; transition: all 0.4s ease;
+        }
+        .blog-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 15px 30px rgba(42, 62, 52, 0.1); }
+        .blog-image { width: 100%; height: 280px; background-color: var(--border-color); position: relative; overflow: hidden; }
+        .blog-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .blog-card:hover .blog-image img { transform: scale(1.03); }
+        .blog-image::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background-color: var(--structure); opacity: 0; transition: opacity 0.4s; mix-blend-mode: color; }
+        .blog-card:hover .blog-image::after { opacity: 0.3; }
+        .blog-content { padding: 2.5rem; }
+        .blog-tag { display: inline-block; padding: 0.3rem 1rem; background-color: var(--structure); color: #F7F5F0; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.2rem; letter-spacing: 1px; }
+        [data-theme="dark"] .blog-tag { background-color: var(--accent); color: #1C2821; }
+        .blog-content h2 { font-size: 1.8rem; margin-bottom: 1rem; line-height: 1.3; color: var(--structure); }
+        [data-theme="dark"] .blog-content h2 { color: #ffffff; }
+        .blog-content p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.05rem; text-align: justify; }
+        .blog-link { font-weight: 700; color: var(--structure); display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        [data-theme="dark"] .blog-link { color: var(--accent); }
+
+        /* --- ESTILOS: VISTA SOBRE NOSOTROS --- */
+        .team-header { text-align: center; padding: 3rem 2rem; }
+        .team-header h1 { font-size: 2.8rem; color: var(--structure); }
+        [data-theme="dark"] .team-header h1 { color: #ffffff; }
+        .team-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2rem 4rem; }
+        .team-card {
+            background-color: var(--card-bg); border-radius: 16px; padding: 3rem 2rem;
+            border: 2px solid var(--border-color); text-align: center; display: flex; flex-direction: column; align-items: center;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .profile-img-container { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 1.5rem; border: 3px solid var(--border-color); transition: border-color 0.4s; }
+        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .team-card h2 { font-size: 1.45rem; margin-bottom: 0.4rem; color: var(--structure); }
+        [data-theme="dark"] .team-card h2 { color: #ffffff; }
+        .team-role { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; color: var(--text-muted); }
+        .team-bio { color: var(--text-main); font-size: 0.95rem; text-align: justify; line-height: 1.6; }
+        
+        /* Efectos de Hover Personalizados */
+        .card-ana:hover { border-color: var(--ana-color); box-shadow: 0 15px 30px rgba(42, 62, 52, 0.15); }
+        .card-ana:hover .profile-img-container { border-color: var(--ana-color); }
+        .card-ana:hover .team-role { color: var(--ana-color); }
+        
+        .card-abel:hover { border-color: var(--abel-color); box-shadow: 0 15px 30px rgba(225, 29, 72, 0.12); }
+        .card-abel:hover .profile-img-container { border-color: var(--abel-color); }
+        .card-abel:hover .team-role { color: var(--abel-color); }
+        
+        .card-rafa:hover { border-color: var(--rafa-color); box-shadow: 0 15px 30px rgba(5, 150, 105, 0.12); }
+        .card-rafa:hover .profile-img-container { border-color: var(--rafa-color); }
+        .card-rafa:hover .team-role { color: var(--rafa-color); }
+
+        /* Modales Interactivos */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(28, 40, 33, 0.6); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
+        .modal-content { background: var(--bg-color); padding: 3rem; border-radius: 16px; text-align: center; max-width: 480px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .close-btn { margin-top: 2rem; background: transparent; border: 2px solid var(--text-main); color: var(--text-main); }
+        .close-btn:hover { background: var(--text-main); color: var(--bg-color); box-shadow: none; }
+
+        /* Responsividad Móvil */
+        @media (max-width: 992px) {
+            .team-container { grid-template-columns: 1fr; padding: 2rem; gap: 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo" onclick="switchView('home')">OIA.</a>
+        <ul class="nav-links">
+            <li><a href="#" id="nav-home" class="active" onclick="switchView('home')" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="#" id="nav-blog" onclick="switchView('blog')" data-i18n="nav_blog">Blog</a></li>
+            <li><a href="#" id="nav-about" onclick="switchView('about')" data-i18n="nav_about">Sobre nosotros</a></li>
+        </ul>
+        <div class="controls">
+            <button class="ctrl-btn" onclick="toggleLang()" id="langBtn">ENG</button>
+            <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <main id="view-home" class="view-section active">
+        <header class="hero">
+            <h1 data-i18n="hero_title">¿Estás usando la IA correctamente en el salón de clases?</h1>
+            <p data-i18n="hero_desc">La adopción de herramientas como ChatGPT, Gemini y Claude se ha acelerado, pero gran parte de la discusión se concentra solo en la productividad y eficiencia.</p>
+            <button class="btn" onclick="openModal()"><i class="fa-solid fa-eye"></i> <span data-i18n="hero_btn">Descubre tu perfil de usuario</span></button>
+        </header>
+
+        <section class="grid-home">
+            <div class="card-home">
+                <i class="fa-solid fa-scale-unbalanced"></i>
+                <h3 data-i18n="card1_title">¿Productividad o Dependencia?</h3>
+                <p data-i18n="card1_desc">Las IA generativas apoyan los procesos de aprendizaje e investigación diaria. Pero, ¿estamos delegando el pensamiento crítico a un algoritmo que solo predice texto?</p>
+            </div>
+            <div class="card-home">
+                <i class="fa-solid fa-brain"></i>
+                <h3 data-i18n="card2_title">Los Algoritmos también Alucinan</h3>
+                <p data-i18n="card2_desc">Los sistemas de IA reflejan los datos con los que fueron entrenados. ¿Sabes cómo identificar sesgos de información y evitar que se reproduzcan desigualdades en tus trabajos?</p>
+            </div>
+            <div class="card-home">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h3 data-i18n="card3_title">Tecnología desde el Sur Global</h3>
+                <p data-i18n="card3_desc">Adoptamos acríticamente tecnologías desarrolladas en otros contextos. Necesitamos una visión Slow AI: sostenible, participativa y adaptada a la realidad mexicana.</p>
+            </div>
+        </section>
+
+        <section class="solution-bar">
+            <h2 data-i18n="sol_title">Observatorio Universitario de IA y Cultura Digital</h2>
+            <p data-i18n="sol_desc1">Un espacio diseñado para estudiantes y docentes universitarios. Nuestro objetivo no es prohibir la IA, sino construir una plataforma de alfabetización crítica para comprender, debatir y utilizar estas tecnologías de manera ética e informada.</p>
+            <p><em data-i18n="sol_desc2">Explora mapas de alucinaciones, foros de debate y guías prácticas contra la dependencia tecnológica.</em></p>
+            <button class="btn" style="margin-top: 1.5rem;" onclick="window.open('https://forms.gle/D2N11AVbwhNE8aD4A', '_blank')">
+                <i class="fa-solid fa-flask"></i> <span data-i18n="sol_btn">Ayúdanos a construirlo (Encuesta)</span>
+            </button>
+        </section>
+    </main>
+
+    <main id="view-blog" class="view-section">
+        <header class="blog-header">
+            <h1 data-i18n="blog_header_title">Recursos de Interés para Maestros sobre IA</h1>
+            <p style="color: var(--text-muted);" data-i18n="blog_header_desc">Explora lecturas, seminarios y proyectos diseñados para fomentar la alfabetización crítica en las aulas.</p>
+        </header>
+        
+        <div class="blog-container">
+            <a href="https://www.straitstimes.com/multimedia/graphics/2026/04/ai-chatbots-privacy-risk/index.html" target="_blank" class="blog-card">
+                <div class="blog-image"><img src="images/straitstimes.png" alt="Straits Times Graphic"></div>
+                <div class="blog-content">
+                    <span class="blog-tag" data-i18n="tag_1">Cápsula periodística</span>
+                    <h2 data-i18n="title_1">El peligro invisible: ¿Qué pasa con tu privacidad cuando hablas con un chatbot?</h2>
+                    <p data-i18n="desc_1">Cada conversación, secreto o dato personal que compartes con un chatbot de IA se queda registrado. Este especial multimedia interactivo de The Straits Times explica de forma visual los graves riesgos de privacidad que asumimos al usar estas herramientas.</p>
+                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="https://www.clacso.org/cultura-digital-y-contrahegemonia-en-la-era-de-la-inteligencia-artificial-2/" target="_blank" class="blog-card">
+                <div class="blog-image"><img src="images/clacso.png" alt="CLACSO Seminar"></div>
+                <div class="blog-content">
+                    <span class="blog-tag" data-i18n="tag_2">Curso</span>
+                    <h2 data-i18n="title_2">Cultura digital y contrahegemonía: Pensar la Inteligencia Artificial desde las ciencias sociales.</h2>
+                    <p data-i18n="desc_2">¿Es posible resistir a la gobernanza algorítmica? Comparto este seminario de posgrado de CLACSO que analiza de forma crítica el impacto socio-técnico de la IA a través de debates sobre datificación social, plataformas y control digital.</p>
+                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <a href="https://aixdesign.co/projects/slow-ai" target="_blank" class="blog-card">
+                <div class="blog-image"><img src="images/slowai.png" alt="Slow AI Project"></div>
+                <div class="blog-content">
+                    <span class="blog-tag" data-i18n="tag_3">Proyecto</span>
+                    <h2 data-i18n="title_3">Slow AI: Diseñando una inteligencia artificial más humana, ética y pausada.</h2>
+                    <p data-i18n="desc_3">En un mundo obsesionado con la velocidad y la automatización extrema, surge "Slow AI". Este proyecto propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.</p>
+                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <main id="view-about" class="view-section">
+        <header class="team-header">
+            <h1 data-i18n="team_header_title">Nuestro Equipo</h1>
+            <p style="color: var(--text-muted);" data-i18n="team_header_desc">Las mentes detrás del Observatorio Universitario de Inteligencia Artificial.</p>
+        </header>
+
+        <div class="team-container">
+            <section class="team-card card-ana">
+                <div class="profile-img-container"><img src="images/anapau.jpeg" alt="Ana Paula Galindo Borrego"></div>
+                <h2>Ana Paula Galindo Borrego</h2>
+                <div class="team-role" data-i18n="ana_role">Cofundadora & Desarrollo Frontend</div>
+                <p class="team-bio" data-i18n="ana_bio">Estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Internacionalista con especialidad en Ciencia de Datos, lidera el desarrollo frontend (HTML/JS) y el diseño de la experiencia digital (UI/UX), combinando la filosofía de la tecnología con la visualización interactiva.</p>
+            </section>
+
+            <section class="team-card card-abel">
+                <div class="profile-img-container"><img src="images/abel.jpeg" alt="Abel Adán Martínez Trujillo"></div>
+                <h2>Abel Adán Martínez Trujillo</h2>
+                <div class="team-role" data-i18n="abel_role">Creador de Contenidos Didácticos</div>
+                <p class="team-bio" data-i18n="abel_bio">Perito traductor e instructor de inglés en el Tecnológico de Monterrey y la industria maquiladora en Ciudad Juárez. Licenciado en Enseñanza del Inglés y estudiante de la Maestría en Humanidades Digitales. Implementa tecnologías críticas para optimizar la adquisición de lenguas de manera ética y personalizada.</p>
+            </section>
+
+            <section class="team-card card-rafa">
+                <div class="profile-img-container"><img src="images/rafael.jpeg" alt="Rafael Benítez Sandoval"></div>
+                <h2>Rafael Benítez Sandoval</h2>
+                <div class="team-role" data-i18n="rafa_role">Diseño Conceptual & Metodológico</div>
+                <p class="team-bio" data-i18n="rafa_bio">Licenciado en Sociología, docente universitario y estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Participa en el diseño conceptual orientando la plataforma hacia la justicia digital, los sesgos algorítmicos y los desafíos éticos en contextos educativos.</p>
+            </section>
+        </div>
+    </main>
+
+    <div class="modal" id="interactiveModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-cube" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h3 data-i18n="modal_title">¡Espera un momento!</h3>
+            <p style="margin-top: 1rem; color: var(--text-muted);" data-i18n="modal_desc">Esta plataforma orientada al Humanismo Tecnológico está en construcción. Tu retroalimentación nos ayuda a diseñar mejores espacios críticos.</p>
+            <button class="btn close-btn" onclick="closeModal()" data-i18n="modal_btn">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Enrutador SPA ---
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(`view-${viewName}`).classList.add('active');
+            if(document.getElementById(`nav-${viewName}`)) {
+                document.getElementById(`nav-${viewName}`).classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 2. Diccionario de Traducción ---
+        const translations = {
+            es: {
+                page_title: "Observatorio de Inteligencia Artificial y Cultura Digital",
+                nav_home: "Inicio", nav_blog: "Blog", nav_about: "Sobre nosotros",
+                hero_title: "¿Estás usando la IA correctamente en el salón de clases?",
+                hero_desc: "La adopción de herramientas como ChatGPT, Gemini y Claude se ha acelerado, pero gran parte de la discusión se concentra solo en la productividad y eficiencia.",
+                hero_btn: "Descubre tu perfil de usuario",
+                card1_title: "¿Productividad o Dependencia?",
+                card1_desc: "Las IA generativas apoyan los procesos de aprendizaje e investigación diaria. Pero, ¿estamos delegando el pensamiento crítico a un algoritmo que solo predice texto?",
+                card2_title: "Los Algoritmos también Alucinan",
+                card2_desc: "Los sistemas de IA reflejan los datos con los que fueron entrenados. ¿Sabes cómo identificar sesgos de información y evitar que se reproduzcan desigualdades en tus trabajos?",
+                card3_title: "Tecnología desde el Sur Global",
+                card3_desc: "Adoptamos acríticamente tecnologías desarrolladas en otros contextos. Necesitamos una visión Slow AI: sostenible, participativa y adaptada a la realidad mexicana.",
+                sol_title: "Observatorio Universitario de IA y Cultura Digital",
+                sol_desc1: "Un espacio diseñado para estudiantes y docentes universitarios. Nuestro objetivo no es prohibir la IA, sino construir una plataforma de alfabetización crítica para comprender, debatir y utilizar estas tecnologías de manera ética e informada.",
+                sol_desc2: "Explora mapas de alucinaciones, foros de debate y guías prácticas contra la dependencia tecnológica.",
+                sol_btn: "Ayúdanos a construirlo (Encuesta)",
+                blog_header_title: "Recursos de Interés para Maestros sobre IA",
+                blog_header_desc: "Explora lecturas, seminarios y proyectos diseñados para fomentar la alfabetización crítica en las aulas.",
+                tag_1: "Cápsula periodística",
+                title_1: "El peligro invisible: ¿Qué pasa con tu privacidad cuando hablas con un chatbot?",
+                desc_1: "Cada conversación, secreto o dato personal que compartes con un chatbot de IA se queda registrado. Este especial multimedia interactivo de The Straits Times explica de forma visual los graves riesgos de privacidad que asumimos al usar estas herramientas.",
+                tag_2: "Curso",
+                title_2: "Cultura digital y contrahegemonía: Pensar la Inteligencia Artificial desde las ciencias sociales.",
+                desc_2: "¿Es posible resistir a la gobernanza algorítmica? Comparto este seminario de posgrado de CLACSO que analiza de forma crítica el impacto socio-técnico de la IA a través de debates sobre datificación social, plataformas y control digital.",
+                tag_3: "Proyecto",
+                title_3: "Slow AI: Diseñando una inteligencia artificial más humana, ética y pausada.",
+                desc_3: "En un mundo obsesionado con la velocidad y la automatización extrema, surge \"Slow AI\". Este proyecto de AIxDesign propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.",
+                read_more: "Explorar recurso",
+                team_header_title: "Nuestro Equipo",
+                team_header_desc: "Las mentes detrás del Observatorio Universitario de Inteligencia Artificial y Cultura Digital.",
+                ana_role: "Cofundadora & Desarrollo Frontend",
+                ana_bio: "Estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Internacionalista con especialidad en Ciencia de Datos, lidera el desarrollo frontend (HTML/JS) y el diseño de la experiencia digital (UI/UX), combinando la filosofía de la tecnología con la visualización interactiva.",
+                abel_role: "Creador de Contenidos Didácticos",
+                abel_bio: "Perito traductor e instructor de inglés en el Tecnológico de Monterrey y la industria maquiladora en Ciudad Juárez. Licenciado en Enseñanza del Inglés y estudiante de la Maestría en Humanidades Digitales. Implementa tecnologías críticas para optimizar la adquisición de lenguas de manera ética y personalizada.",
+                rafa_role: "Diseño Conceptual & Metodológico",
+                rafa_bio: "Licenciado en Sociología, docente universitario y estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Participa en el diseño conceptual orientando la plataforma hacia la justicia digital, los sesgos algorítmicos y los desafíos éticos en contextos educativos.",
+                modal_title: "¡Espera un momento!",
+                modal_desc: "Esta plataforma orientada al Humanismo Tecnológico está en construcción. Tu retroalimentación nos ayuda a diseñar mejores espacios críticos.",
+                modal_btn: "Entendido"
+            },
+            en: {
+                page_title: "AI and Digital Culture Observatory",
+                nav_home: "Home", nav_blog: "Blog", nav_about: "About us",
+                hero_title: "Are you using AI correctly in the classroom?",
+                hero_desc: "The adoption of tools like ChatGPT, Gemini, and Claude has accelerated, but most discussions focus solely on productivity and efficiency.",
+                hero_btn: "Discover your user profile",
+                card1_title: "Productivity or Dependency?",
+                card1_desc: "Generative AIs support daily learning and research processes. But are we delegating critical thinking to an algorithm that only predicts text?",
+                card2_title: "Algorithms Hallucinate Too",
+                card2_desc: "AI systems reflect the data they were trained on. Do you know how to identify information biases and avoid reproducing inequalities in your work?",
+                card3_title: "Technology from the Global South",
+                card3_desc: "We uncritically adopt technologies developed in other contexts. We need a Slow AI vision: sustainable, participatory, and adapted to our reality.",
+                sol_title: "University Observatory of AI & Digital Culture",
+                sol_desc1: "A space designed for students and professors. Our goal is not to ban AI, but to build a critical literacy platform to understand and use these technologies ethically.",
+                sol_desc2: "Explore hallucination maps, debate forums, and practical guides against technological dependency.",
+                sol_btn: "Help us build it (Survey)",
+                blog_header_title: "AI Resources of Interest for Teachers",
+                blog_header_desc: "Explore readings, seminars, and projects designed to foster critical literacy in classrooms.",
+                tag_1: "News Capsule",
+                title_1: "The Invisible Danger: What happens to your privacy when you talk to a chatbot?",
+                desc_1: "Every conversation, secret, or personal detail you share with an AI chatbot is recorded. This interactive multimedia special from The Straits Times visually explains the privacy risks.",
+                tag_2: "Course",
+                title_2: "Digital Culture and Counter-hegemony: Thinking AI from the Social Sciences.",
+                desc_2: "Is it possible to resist algorithmic governance? I share this CLACSO postgraduate seminar that critically analyzes the socio-technical impact of AI through debates on datafication.",
+                tag_3: "Project",
+                title_3: "Slow AI: Designing a more human, ethical, and paced artificial intelligence.",
+                desc_3: "In a world obsessed with extreme speed and automation, \"Slow AI\" emerges. This AIxDesign project proposes a revolutionary alternative: slowing down technology to prioritize care and community.",
+                read_more: "Explore resource",
+                team_header_title: "Our Team",
+                team_header_desc: "The minds behind the University Observatory of Artificial Intelligence and Digital Culture.",
+                ana_role: "Co-founder & Frontend Development",
+                ana_bio: "Master's student in Digital Humanities at Tecnológico de Monterrey. Internationalist specialized in Data Science, she leads frontend development (HTML/JS) and UI/UX experience design.",
+                abel_role: "Educational Content Creator",
+                abel_bio: "Certified translator and English instructor at Tecnológico de Monterrey and the maquiladora industry in Ciudad Juárez. Bachelor's in English Teaching and Master's student in Digital Humanities.",
+                rafa_role: "Conceptual & Methodological Design",
+                rafa_bio: "Degree in Sociology, university lecturer, and Master's student in Digital Humanities at Tecnológico de Monterrey. Participates in conceptual design focusing on digital justice and algorithmic bias.",
+                modal_title: "Wait a minute!",
+                modal_desc: "This alternative platform under Technological Humanism is under construction. Your feedback helps us design better critical spaces.",
+                modal_btn: "Got it"
+            }
+        };
+
+        let currentLang = localStorage.getItem('site_lang') || 'es';
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            if(currentLang === 'en') {
+                document.getElementById('langBtn').innerText = 'ESP';
+                applyTranslations('en');
+            }
+            if (localStorage.getItem('site_theme') === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.querySelector('#themeBtn i').className = 'fa-solid fa-sun';
+            }
+        });
+
+        function toggleLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            localStorage.setItem('site_lang', currentLang);
+            document.getElementById('langBtn').innerText = currentLang === 'es' ? 'ENG' : 'ESP';
+            applyTranslations(currentLang);
+        }
+
+        function applyTranslations(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if(translations[lang][key]) {
+                    elem.innerText = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        // --- 3. Control de Tema ---
+        function toggleTheme() {
+            const body = document.documentElement;
+            const themeBtnIcon = document.querySelector('#themeBtn i');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeBtnIcon.className = 'fa-solid fa-moon';
+                localStorage.setItem('site_theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtnIcon.className = 'fa-solid fa-sun';
+                localStorage.setItem('site_theme', 'dark');
+            }
+        }
+
+        // --- 4. Modales Globales ---
+        function openModal() { document.getElementById('interactiveModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('interactiveModal').style.display = 'none'; }
+        window.onclick = function(event) {
+            let modal = document.getElementById('interactiveModal');
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+    </script>
+</body>
+</html>
