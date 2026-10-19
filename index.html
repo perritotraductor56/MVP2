@@ -32,7 +32,6 @@
             --accent-critical: #5F0F40;
             --accent-slow-ai: #2D6A4F;
 
-            /* Variante más oscura para texto pequeño sobre fondo claro. */
             --terracotta-text: #A3440D;
             --critical-text: #5F0F40;
             --sage-text: #2D6A4F;
@@ -56,7 +55,6 @@
             --abel-color: #5F0F40;
             --rafa-color: #2D6A4F;
 
-            /* Compatibilidad con estilos del contenido original. */
             --bg-color: var(--bg-primary);
             --text-main: var(--text-primary);
             --text-muted: var(--text-secondary);
@@ -599,7 +597,6 @@
             line-height: 1.35;
         }
 
-        /* Las infografías se muestran completas, sin recortar. */
         .infographic-link {
             display: block;
             background: var(--bg-elevated);
@@ -1300,17 +1297,18 @@
         images/Infografía 1.jpeg
         images/Infografía 2.jpeg
 
-        El video debe tener permisos de visualización para su audiencia.
-        Para un sitio público, pruebe el enlace de Drive sin iniciar sesión.
+        Ambos videos necesitan permisos de visualización para su audiencia.
+        Para un sitio público, pruebe los enlaces de Drive sin iniciar sesión.
     -->
     <main id="view-content" class="view-section">
         <header class="content-header">
             <h1 data-i18n="content_title">Contenido</h1>
-            <p data-i18n="content_intro">Infografías y video para explorar la inteligencia artificial y la cultura digital con una mirada crítica.</p>
+            <p data-i18n="content_intro">Infografías y videos para explorar la inteligencia artificial y la cultura digital con una mirada crítica.</p>
         </header>
 
         <div class="content-container">
             <div class="content-grid">
+                <!-- INFOGRAFÍA 1 -->
                 <article class="content-card" aria-labelledby="infographic-openai-title">
                     <header class="content-card-header">
                         <span class="content-kind" data-i18n="content_infographic">Infografía</span>
@@ -1338,6 +1336,7 @@
                     </figure>
                 </article>
 
+                <!-- INFOGRAFÍA 2 -->
                 <article class="content-card content-card--data" aria-labelledby="infographic-data-title">
                     <header class="content-card-header">
                         <span class="content-kind" data-i18n="content_infographic">Infografía</span>
@@ -1366,16 +1365,17 @@
                 </article>
             </div>
 
+            <!-- VIDEO 1: LA IA EN EL AMBIENTE ACADÉMICO -->
             <article class="content-card content-video" aria-labelledby="content-video-title">
                 <header class="content-card-header">
                     <span class="content-kind" data-i18n="content_video_type">Video</span>
-                    <h2 id="content-video-title" data-i18n="content_video_title">Recurso audiovisual</h2>
+                    <h2 id="content-video-title" data-i18n="content_video_title">La IA en el ambiente académico</h2>
                 </header>
 
                 <div class="video-frame">
                     <iframe
                         src="https://drive.google.com/file/d/1L-qq5IWKKetTtVQsCmLIGIzhn7IkVbjL/preview"
-                        title="Reproductor de video de Google Drive"
+                        title="La IA en el ambiente académico"
                         data-i18n-title="content_video_frame_title"
                         loading="lazy"
                         allow="fullscreen"
@@ -1394,7 +1394,36 @@
                 </div>
             </article>
 
-            <p class="content-language-note" data-i18n="content_language_note">El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma del video permanecen en su versión original.</p>
+            <!-- VIDEO 2: COLONIALISMO DE DATOS -->
+            <article class="content-card content-video" aria-labelledby="content-video-colonialism-title">
+                <header class="content-card-header">
+                    <span class="content-kind" data-i18n="content_video_type">Video</span>
+                    <h2 id="content-video-colonialism-title" data-i18n="content_video_2_title">Colonialismo de datos</h2>
+                </header>
+
+                <div class="video-frame">
+                    <iframe
+                        src="https://drive.google.com/file/d/1W0V77ceVHKdkV7CicXolxbpLkzDHjx_M/preview"
+                        title="Colonialismo de datos"
+                        data-i18n-title="content_video_2_title"
+                        loading="lazy"
+                        allow="fullscreen"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <div class="video-fallback">
+                    <p data-i18n="content_video_help">Si el video no se reproduce aquí, puedes abrirlo directamente en Google Drive.</p>
+                    <a class="content-action"
+                       href="https://drive.google.com/file/d/1W0V77ceVHKdkV7CicXolxbpLkzDHjx_M/view?usp=sharing"
+                       target="_blank" rel="noopener noreferrer">
+                        <span data-i18n="content_open_video">Ver en Google Drive (nueva pestaña)</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </article>
+
+            <p class="content-language-note" data-i18n="content_language_note">El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma de los videos permanecen en su versión original.</p>
         </div>
     </main>
 
@@ -1513,7 +1542,6 @@
     <script>
         // =====================================================
         // DICCIONARIO DE TRADUCCIÓN
-        // Se conservan los textos de las secciones originales.
         // =====================================================
         const translations = {
             es: {
@@ -1552,7 +1580,7 @@
                 read_more: "Explorar recurso",
 
                 content_title: "Contenido",
-                content_intro: "Infografías y video para explorar la inteligencia artificial y la cultura digital con una mirada crítica.",
+                content_intro: "Infografías y videos para explorar la inteligencia artificial y la cultura digital con una mirada crítica.",
                 content_infographic: "Infografía",
                 content_infographic_1: "La metamorfosis de OpenAI",
                 content_infographic_2: "Colonización de Datos",
@@ -1560,11 +1588,12 @@
                 content_infographic_2_alt: "Infografía: Colonización de Datos. Abrir imagen en una pestaña nueva.",
                 content_open_image: "Abrir imagen completa (nueva pestaña)",
                 content_video_type: "Video",
-                content_video_title: "Recurso audiovisual",
-                content_video_frame_title: "Reproductor de video de Google Drive",
+                content_video_title: "La IA en el ambiente académico",
+                content_video_frame_title: "La IA en el ambiente académico",
+                content_video_2_title: "Colonialismo de datos",
                 content_video_help: "Si el video no se reproduce aquí, puedes abrirlo directamente en Google Drive.",
                 content_open_video: "Ver en Google Drive (nueva pestaña)",
-                content_language_note: "El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma del video permanecen en su versión original.",
+                content_language_note: "El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma de los videos permanecen en su versión original.",
 
                 team_header_title: "Nuestro Equipo",
                 team_header_desc: "Las mentes detrás de AcademIA.",
@@ -1628,7 +1657,6 @@
                 card1_desc: "Generative AIs support daily learning and research processes. But are we delegating critical thinking to an algorithm that only predicts text?",
                 card2_title: "Algorithms Hallucinate Too",
                 card2_desc: "AI systems reflect the data they were trained on. Do you know how to identify information biases and avoid reproducing inequalities in your work?",
-                card2_title: "Algorithms Hallucinate Too",
                 card3_title: "Technology from the Global South",
                 card3_desc: "We uncritically adopt technologies developed in other contexts. We need a Slow AI vision: sustainable, participatory, and adapted to our reality.",
                 sol_title: "AcademIA - Digital Culture",
@@ -1650,7 +1678,7 @@
                 read_more: "Explore resource",
 
                 content_title: "Content",
-                content_intro: "Infographics and video to explore artificial intelligence and digital culture through a critical lens.",
+                content_intro: "Infographics and videos to explore artificial intelligence and digital culture through a critical lens.",
                 content_infographic: "Infographic",
                 content_infographic_1: "The Metamorphosis of OpenAI",
                 content_infographic_2: "Data Colonization",
@@ -1658,11 +1686,12 @@
                 content_infographic_2_alt: "Infographic: Data Colonization. Open image in a new tab.",
                 content_open_image: "Open full image (new tab)",
                 content_video_type: "Video",
-                content_video_title: "Audiovisual Resource",
-                content_video_frame_title: "Google Drive video player",
+                content_video_title: "AI in the Academic Environment",
+                content_video_frame_title: "AI in the Academic Environment",
+                content_video_2_title: "Data Colonialism",
                 content_video_help: "If the video does not play here, you can open it directly in Google Drive.",
                 content_open_video: "Watch on Google Drive (new tab)",
-                content_language_note: "The language button translates this page’s headings and instructions. Text within the infographics and the video’s language remain in their original version.",
+                content_language_note: "The language button translates this page’s headings and instructions. Text within the infographics and the language of the videos remain in their original version.",
 
                 team_header_title: "Our Team",
                 team_header_desc: "The minds behind AcademIA.",
@@ -1899,7 +1928,6 @@
 
             document.getElementById("modalCloseBtn").focus();
 
-            // Evita interacción con el contenido detrás del modal.
             document.querySelectorAll(".navbar, .view-section").forEach(element => {
                 element.inert = true;
             });
@@ -1909,17 +1937,18 @@
             const modal = document.getElementById("interactiveModal");
             if (!modal.classList.contains("is-open")) return;
 
-            modal.classList.remove("is-open");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = previousBodyOverflow;
-
             document.querySelectorAll(".navbar, .view-section").forEach(element => {
                 element.inert = false;
             });
 
+            document.body.style.overflow = previousBodyOverflow;
+
             if (previousFocus && previousFocus.isConnected) {
                 previousFocus.focus({ preventScroll: true });
             }
+
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
         }
 
         document.getElementById("interactiveModal").addEventListener("click", event => {
