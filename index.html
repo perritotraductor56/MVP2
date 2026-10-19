@@ -4,252 +4,1188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="page_title">AcademIA | Inteligencia Artificial y Cultura Digital</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* Variables de Diseño: Filosofía Slow AI / Crítica Ecosistémica */
+        /* =====================================================
+           IDENTIDAD VISUAL — AcademIA
+           ===================================================== */
         :root {
-            --bg-color: #F7F5F0;       
-            --text-main: #1C2821;      
-            --text-muted: #4A5D53;     
-            --accent: #E5A93B;         
-            --structure: #2A3E34;      
-            --card-bg: #EFECE3;        
-            --border-color: #D3CFC4;   
-            --nav-bg: rgba(247, 245, 240, 0.95);
-            
-            --ana-color: #2A3E34;
-            --abel-color: #e11d48;
-            --rafa-color: #059669;
+            color-scheme: light;
+
+            --bg-primary: #FAF7F2;
+            --bg-secondary: #EFECE6;
+            --bg-elevated: #FFFFFF;
+
+            --text-primary: #1C2526;
+            --text-secondary: #526066;
+            --border-subtle: #DCD7CE;
+
+            --brand-academ: #0F4C5C;
+            --brand-ia: #E36414;
+
+            --accent-vigilance: #FB8B24;
+            --accent-critical: #5F0F40;
+            --accent-slow-ai: #2D6A4F;
+
+            /* Variante más oscura para texto pequeño sobre fondo claro. */
+            --terracotta-text: #A3440D;
+            --critical-text: #5F0F40;
+            --sage-text: #2D6A4F;
+            --heading-color: #0F4C5C;
+            --logo-color: #0F4C5C;
+
+            --on-brand: #FAF7F2;
+            --on-brand-accent: #FFB176;
+            --button-text: #1C2526;
+            --button-hover: #F07932;
+
+            --badge-terracotta-bg: rgba(227, 100, 20, 0.12);
+            --badge-amber-bg: rgba(251, 139, 36, 0.15);
+            --badge-plum-bg: rgba(95, 15, 64, 0.10);
+            --badge-sage-bg: rgba(45, 106, 79, 0.12);
+
+            --nav-bg: rgba(250, 247, 242, 0.97);
+            --shadow-soft: 0 10px 28px rgba(28, 37, 38, 0.07);
+
+            --ana-color: #0F4C5C;
+            --abel-color: #5F0F40;
+            --rafa-color: #2D6A4F;
+
+            /* Compatibilidad con estilos del contenido original. */
+            --bg-color: var(--bg-primary);
+            --text-main: var(--text-primary);
+            --text-muted: var(--text-secondary);
+            --accent: var(--brand-ia);
+            --structure: var(--brand-academ);
+            --card-bg: var(--bg-secondary);
+            --border-color: var(--border-subtle);
         }
 
         [data-theme="dark"] {
-            --bg-color: #131B17;       
-            --text-main: #F7F5F0;      
-            --text-muted: #A3B5AB;     
-            --accent: #E5A93B;         
-            --structure: #2A3E34;      
-            --card-bg: #1C2821;        
-            --border-color: #354A3E;   
-            --nav-bg: rgba(19, 27, 23, 0.95);
+            color-scheme: dark;
+
+            --bg-primary: #172123;
+            --bg-secondary: #223034;
+            --bg-elevated: #29393D;
+
+            --text-primary: #FAF7F2;
+            --text-secondary: #C2CDCC;
+            --border-subtle: #506165;
+
+            --terracotta-text: #FFB176;
+            --critical-text: #E5A7CB;
+            --sage-text: #A2D1B5;
+            --heading-color: #D5EBED;
+            --logo-color: #D5EBED;
+
+            --badge-terracotta-bg: rgba(227, 100, 20, 0.16);
+            --badge-amber-bg: rgba(251, 139, 36, 0.15);
+            --badge-plum-bg: rgba(229, 167, 203, 0.12);
+            --badge-sage-bg: rgba(162, 209, 181, 0.12);
+
+            --nav-bg: rgba(23, 33, 35, 0.97);
+            --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.18);
+
+            --ana-color: #9CCBD2;
+            --abel-color: #E5A7CB;
+            --rafa-color: #A2D1B5;
         }
 
+        /* =====================================================
+           BASE
+           ===================================================== */
         * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Raleway', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.7;
+            font-family: "Raleway", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.75;
             overflow-x: hidden;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
-        .navbar {
-            position: fixed; top: 0; width: 100%; padding: 1.2rem 2rem;
-            background-color: var(--nav-bg); backdrop-filter: blur(12px);
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; border-bottom: 1px solid var(--border-color);
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Cambio de Logo a AcademIA */
-        .logo { font-weight: 900; font-size: 1.5rem; color: var(--structure); text-decoration: none; letter-spacing: 0.5px; }
-        [data-theme="dark"] .logo { color: var(--accent); }
-        .logo-accent { color: var(--accent); }
-
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { 
-            text-decoration: none; color: var(--text-main); font-weight: 600; 
-            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
+        button {
+            font: inherit;
         }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
-        .controls { display: flex; gap: 1rem; align-items: center; }
-        .ctrl-btn {
-            background: transparent; border: 2px solid var(--border-color);
-            color: var(--text-main); padding: 0.5rem 1.2rem; border-radius: 30px;
-            cursor: pointer; font-family: inherit; font-weight: 700; transition: all 0.3s;
+        a:focus-visible,
+        button:focus-visible,
+        iframe:focus-visible {
+            outline: 3px solid var(--terracotta-text);
+            outline-offset: 5px;
         }
-        .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-        .hamburger { 
-            display: none; background: transparent; border: none; 
-            font-size: 1.5rem; color: var(--structure); cursor: pointer; 
-            margin-left: 0.5rem; transition: color 0.3s; 
+        img {
+            max-width: 100%;
         }
-        [data-theme="dark"] .hamburger { color: var(--accent); }
+
+        h1,
+        h2,
+        h3 {
+            overflow-wrap: break-word;
+        }
 
         .view-section {
-            display: none; 
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            min-height: 100vh; padding-top: 6rem;
-            position: relative; 
-            z-index: 1; 
-        }
-        .view-section.active { display: block; opacity: 1; transform: translateY(0); }
-
-        #view-about::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('images/backgroundaboutus.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed; 
-            opacity: 0.3; z-index: -1; pointer-events: none; 
+            display: none;
+            min-height: 100vh;
+            padding-top: 6rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .btn {
-            padding: 1rem 2.2rem; font-size: 1rem; font-family: inherit; font-weight: 700;
-            color: #1C2821 !important; background-color: var(--accent); border: none;
-            border-radius: 50px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
-            box-shadow: 0 4px 15px rgba(229, 169, 59, 0.2);
+        .view-section.active {
+            display: block;
+            animation: view-in 0.3s ease;
         }
-        .btn:hover { transform: scale(1.03) translateY(-3px); box-shadow: 0 10px 25px rgba(229, 169, 59, 0.4); }
 
-        /* --- ESTILOS: INICIO --- */
-        .hero { text-align: center; padding: 6rem 2rem 4rem; background: radial-gradient(circle at center, var(--card-bg) 0%, var(--bg-color) 70%); }
-        .hero h1 { font-size: 3.2rem; max-width: 950px; margin: 0 auto 2rem; line-height: 1.2; color: var(--structure); }
-        [data-theme="dark"] .hero h1 { color: #ffffff; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem; }
-
-        .grid-home { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .card-home { background-color: var(--card-bg); padding: 3rem 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.4s ease; }
-        .card-home:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(42, 62, 52, 0.08); }
-        .card-home i { font-size: 2.5rem; color: var(--structure); margin-bottom: 1.5rem; transition: color 0.3s; }
-        [data-theme="dark"] .card-home i { color: var(--accent); }
-        .card-home h3 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--structure); }
-        [data-theme="dark"] .card-home h3 { color: #ffffff; }
-        .card-home p { color: var(--text-muted); }
-
-        .solution-bar { background-color: var(--structure); color: #F7F5F0; padding: 6rem 2rem; text-align: center; margin-top: 4rem; }
-        .solution-bar h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; color: var(--accent); }
-        .solution-bar p { max-width: 800px; margin: 0 auto 2rem; font-size: 1.15rem; opacity: 0.9; }
-
-        /* --- ESTILOS: BLOG --- */
-        .blog-header { text-align: center; padding: 3rem 2rem; }
-        .blog-header h1 { font-size: 2.8rem; color: var(--structure); margin-bottom: 0.5rem; }
-        [data-theme="dark"] .blog-header h1 { color: #ffffff; }
-        .blog-container { max-width: 750px; margin: 0 auto; padding: 2rem; }
-        .blog-card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; margin-bottom: 4rem; border: 1px solid var(--border-color); display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: all 0.4s ease; }
-        .blog-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 15px 30px rgba(42, 62, 52, 0.1); }
-        .blog-image { width: 100%; height: 280px; background-color: var(--border-color); position: relative; overflow: hidden; }
-        .blog-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .blog-card:hover .blog-image img { transform: scale(1.03); }
-        .blog-image::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background-color: var(--structure); opacity: 0; transition: opacity 0.4s; mix-blend-mode: color; }
-        .blog-card:hover .blog-image::after { opacity: 0.3; }
-        .blog-content { padding: 2.5rem; }
-        .blog-tag { display: inline-block; padding: 0.3rem 1rem; background-color: var(--structure); color: #F7F5F0; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.2rem; letter-spacing: 1px; }
-        [data-theme="dark"] .blog-tag { background-color: var(--accent); color: #1C2821; }
-        .blog-content h2 { font-size: 1.8rem; margin-bottom: 1rem; line-height: 1.3; color: var(--structure); }
-        [data-theme="dark"] .blog-content h2 { color: #ffffff; }
-        .blog-content p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.05rem; text-align: justify; }
-        .blog-link { font-weight: 700; color: var(--structure); display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; }
-        [data-theme="dark"] .blog-link { color: var(--accent); }
-
-        /* --- ESTILOS: SOBRE NOSOTROS --- */
-        .team-header { text-align: center; padding: 3rem 2rem; }
-        .team-header h1 { font-size: 2.8rem; color: var(--structure); }
-        [data-theme="dark"] .team-header h1 { color: #ffffff; }
-        .team-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 2rem 4rem; }
-        .team-card { background-color: var(--card-bg); border-radius: 16px; padding: 3rem 2rem; border: 2px solid var(--border-color); text-align: center; display: flex; flex-direction: column; align-items: center; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .profile-img-container { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin-bottom: 1.5rem; border: 3px solid var(--border-color); transition: border-color 0.4s; }
-        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .team-card h2 { font-size: 1.45rem; margin-bottom: 0.4rem; color: var(--structure); }
-        [data-theme="dark"] .team-card h2 { color: #ffffff; }
-        .team-role { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; color: var(--text-muted); }
-        .team-bio { color: var(--text-main); font-size: 0.95rem; text-align: justify; line-height: 1.6; }
-        
-        .card-ana:hover { border-color: var(--ana-color); box-shadow: 0 15px 30px rgba(42, 62, 52, 0.15); }
-        .card-ana:hover .profile-img-container { border-color: var(--ana-color); }
-        .card-abel:hover { border-color: var(--abel-color); box-shadow: 0 15px 30px rgba(225, 29, 72, 0.12); }
-        .card-abel:hover .profile-img-container { border-color: var(--abel-color); }
-        .card-rafa:hover { border-color: var(--rafa-color); box-shadow: 0 15px 30px rgba(5, 150, 105, 0.12); }
-        .card-rafa:hover .profile-img-container { border-color: var(--rafa-color); }
-
-        /* --- ESTILOS: PARA SOCIOS --- */
-        .partners-header { text-align: center; padding: 4rem 2rem 2rem; }
-        .partners-header h1 { font-size: 2.8rem; color: var(--structure); max-width: 900px; margin: 0 auto; line-height: 1.3;}
-        [data-theme="dark"] .partners-header h1 { color: #ffffff; }
-        
-        .partners-container { max-width: 1000px; margin: 0 auto; padding: 2rem; display: flex; flex-direction: column; gap: 3rem; }
-        
-        .problem-box { background-color: var(--card-bg); padding: 3rem; border-radius: 16px; border-left: 6px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .problem-box h2 { font-size: 2rem; color: var(--structure); margin-bottom: 1rem; }
-        [data-theme="dark"] .problem-box h2 { color: var(--accent); }
-        .problem-box p { font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem; line-height: 1.6; }
-        .problem-box p:last-child { font-weight: 700; color: var(--structure); margin-bottom: 0; }
-        [data-theme="dark"] .problem-box p:last-child { color: #ffffff; }
-
-        .section-heading { font-size: 2.2rem; color: var(--structure); text-align: center; margin-bottom: -1rem; }
-        [data-theme="dark"] .section-heading { color: #ffffff; }
-
-        .objectives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-        .obj-card { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; text-align: center; transition: transform 0.3s; }
-        .obj-card:hover { transform: translateY(-5px); border-color: var(--structure); }
-        .obj-card h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem; }
-        .obj-card p { color: var(--text-muted); font-size: 1rem; }
-
-        .solution-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
-        .sol-box { background-color: var(--structure); color: #F7F5F0; padding: 3rem; border-radius: 16px; display: flex; flex-direction: column; justify-content: center;}
-        .sol-box h2 { color: var(--accent); font-size: 2rem; margin-bottom: 1rem; }
-        .sol-box p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; line-height: 1.6;}
-        
-        .prod-box { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 3rem; border-radius: 16px; }
-        .prod-box h2 { color: var(--structure); font-size: 2rem; margin-bottom: 1.5rem; }
-        [data-theme="dark"] .prod-box h2 { color: var(--accent); }
-        .prod-box ul { list-style: none; padding: 0; }
-        .prod-box li { position: relative; padding-left: 2rem; margin-bottom: 1rem; font-size: 1.05rem; color: var(--text-main); }
-        .prod-box li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 900; }
-
-        .partners-support-box { text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--border-color); }
-        .partners-support-box h2 { font-size: 2rem; color: var(--structure); margin-bottom: 1.5rem; }
-        [data-theme="dark"] .partners-support-box h2 { color: #ffffff; }
-        .partners-support-box p { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 1.5rem; }
-        .partners-support-box .highlight-text { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-top: 2rem; }
-
-        /* Modales */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(28, 40, 33, 0.6); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(8px); }
-        .modal-content { background: var(--bg-color); padding: 3rem; border-radius: 16px; text-align: center; max-width: 480px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .close-btn { margin-top: 2rem; background: transparent; border: 2px solid var(--text-main); color: var(--text-main); }
-        .close-btn:hover { background: var(--text-main); color: var(--bg-color); box-shadow: none; }
-
-        /* Ajustes y Menú Móvil */
-        @media (max-width: 992px) {
-            .team-container { grid-template-columns: 1fr; padding: 2rem; gap: 3rem; }
-            .solution-wrapper { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.2rem; }
-            
-            .hamburger { display: block; }
-            .nav-links { 
-                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
-                background-color: var(--nav-bg); flex-direction: column; 
-                padding: 1.5rem; text-align: center; gap: 1.5rem; 
-                border-bottom: 1px solid var(--border-color); box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        @keyframes view-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
             }
-            .nav-links.show { display: flex; }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =====================================================
+           NAVEGACIÓN
+           ===================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.25rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: var(--logo-color);
+            text-decoration: none;
+            letter-spacing: -0.6px;
+            white-space: nowrap;
+        }
+
+        .logo-accent {
+            color: var(--brand-ia);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--terracotta-text);
+        }
+
+        .nav-links a.active {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 7px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .ctrl-btn {
+            background: transparent;
+            border: 2px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            min-height: 44px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .ctrl-btn:hover {
+            border-color: var(--brand-ia);
+            color: var(--terracotta-text);
+        }
+
+        .hamburger {
+            display: none;
+            background: transparent;
+            border: none;
+            min-width: 44px;
+            min-height: 44px;
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           BOTONES Y ENCABEZADOS
+           ===================================================== */
+        .btn {
+            padding: 1rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--button-text);
+            background: var(--brand-ia);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(227, 100, 20, 0.14);
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(227, 100, 20, 0.20);
+        }
+
+        .hero h1,
+        .blog-header h1,
+        .team-header h1,
+        .partners-header h1,
+        .content-header h1,
+        .section-heading,
+        .solution-bar h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .blog-header,
+        .team-header {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .blog-header h1,
+        .team-header h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--heading-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* =====================================================
+           INICIO
+           ===================================================== */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: var(--bg-primary);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+            max-width: 950px;
+            margin: 0 auto 2rem;
+            line-height: 1.2;
+            color: var(--heading-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.85;
+        }
+
+        .grid-home {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card-home {
+            --pillar-color: var(--brand-ia);
+            background: var(--bg-secondary);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            border-top: 4px solid var(--pillar-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pillar-critical {
+            --pillar-color: var(--accent-critical);
+        }
+
+        .pillar-vigilance {
+            --pillar-color: var(--accent-vigilance);
+        }
+
+        .pillar-global {
+            --pillar-color: var(--brand-ia);
+        }
+
+        .card-home:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card-home i {
+            font-size: 2.5rem;
+            color: var(--pillar-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .pillar-critical i {
+            color: var(--critical-text);
+        }
+
+        .card-home h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: var(--heading-color);
+        }
+
+        .card-home p {
+            color: var(--text-secondary);
+        }
+
+        .solution-bar {
+            background: var(--brand-academ);
+            color: var(--on-brand);
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .solution-bar h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--on-brand-accent);
+        }
+
+        .solution-bar p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.15rem;
+        }
+
+        .solution-bar :focus-visible,
+        .sol-box :focus-visible {
+            outline-color: var(--on-brand);
+        }
+
+        /* =====================================================
+           BLOG
+           ===================================================== */
+        .blog-container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .blog-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--brand-ia);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 280px;
+            background: var(--border-subtle);
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.02);
+        }
+
+        .blog-content {
+            padding: 2.5rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .tag-terracotta {
+            color: var(--terracotta-text);
+            background: var(--badge-terracotta-bg);
+        }
+
+        .tag-plum {
+            color: var(--critical-text);
+            background: var(--badge-plum-bg);
+        }
+
+        .tag-sage {
+            color: var(--sage-text);
+            background: var(--badge-sage-bg);
+        }
+
+        .blog-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--heading-color);
+        }
+
+        .blog-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+
+        .blog-link {
+            font-weight: 700;
+            color: var(--terracotta-text);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =====================================================
+           CONTENIDO
+           ===================================================== */
+        .content-header {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 3rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .content-header h1 {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            color: var(--heading-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .content-header p {
+            color: var(--text-secondary);
+            margin: 0 auto;
+            max-width: 65ch;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 5rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .content-card {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            border-top: 4px solid var(--brand-ia);
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .content-card--data {
+            border-top-color: var(--accent-critical);
+        }
+
+        .content-card-header,
+        .content-caption {
+            padding: 1.5rem;
+        }
+
+        .content-kind {
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            background: var(--badge-terracotta-bg);
+            color: var(--terracotta-text);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .content-card--data .content-kind {
+            background: var(--badge-plum-bg);
+            color: var(--critical-text);
+        }
+
+        .content-card h2 {
+            color: var(--heading-color);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.65rem;
+            line-height: 1.35;
+        }
+
+        /* Las infografías se muestran completas, sin recortar. */
+        .infographic-link {
+            display: block;
+            background: var(--bg-elevated);
+            cursor: zoom-in;
+        }
+
+        .infographic-link:focus-visible {
+            outline-offset: -5px;
+        }
+
+        .infographic-image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .content-caption {
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .content-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--terracotta-text);
+            font-weight: 700;
+            text-underline-offset: 4px;
+        }
+
+        .content-action:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        .content-video {
+            margin-top: 2rem;
+            border-top-color: var(--accent-slow-ai);
+        }
+
+        .content-video .content-kind {
+            background: var(--badge-sage-bg);
+            color: var(--sage-text);
+        }
+
+        .video-frame {
+            aspect-ratio: 16 / 9;
+            background: #1C2526;
+        }
+
+        .video-frame iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-fallback {
+            padding: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .video-fallback p {
+            margin-bottom: 0.65rem;
+        }
+
+        .content-language-note {
+            margin-top: 2rem;
+            padding: 1rem 1.25rem;
+            border-left: 4px solid var(--accent-vigilance);
+            background: var(--badge-amber-bg);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* =====================================================
+           SOBRE NOSOTROS
+           ===================================================== */
+        #view-about::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("images/backgroundaboutus.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.10;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 4rem;
+        }
+
+        .team-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            border: 2px solid var(--border-subtle);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .profile-img-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--border-subtle);
+            transition: border-color 0.2s ease;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h2 {
+            font-size: 1.45rem;
+            margin-bottom: 0.4rem;
+            color: var(--heading-color);
+        }
+
+        .team-role {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .team-bio {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .card-ana:hover,
+        .card-ana:hover .profile-img-container {
+            border-color: var(--ana-color);
+        }
+
+        .card-abel:hover,
+        .card-abel:hover .profile-img-container {
+            border-color: var(--abel-color);
+        }
+
+        .card-rafa:hover,
+        .card-rafa:hover .profile-img-container {
+            border-color: var(--rafa-color);
+        }
+
+        .team-card:hover {
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* =====================================================
+           PARA SOCIOS
+           ===================================================== */
+        .partners-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .partners-header h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--heading-color);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .partners-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .problem-box {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 12px;
+            border-left: 6px solid var(--brand-academ);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .problem-box h2 {
+            font-size: 2rem;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+        }
+
+        .problem-box p {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .problem-box p:last-child {
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 0;
+        }
+
+        .section-heading {
+            font-size: 2.2rem;
+            color: var(--heading-color);
+            text-align: center;
+            margin-bottom: -1rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 1.5rem;
+        }
+
+        .obj-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .obj-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--heading-color);
+        }
+
+        .obj-card h3 {
+            color: var(--terracotta-text);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .obj-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .solution-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .sol-box {
+            background: var(--brand-academ);
+            color: var(--on-brand);
+            padding: 3rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sol-box h2 {
+            color: var(--on-brand-accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sol-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .prod-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem;
+            border-radius: 12px;
+        }
+
+        .prod-box h2 {
+            color: var(--heading-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prod-box ul {
+            list-style: none;
+        }
+
+        .prod-box li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+        }
+
+        .prod-box li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--terracotta-text);
+            font-weight: 900;
+        }
+
+        .partners-support-box {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .partners-support-box h2 {
+            font-size: 2rem;
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .partners-support-box p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .partners-support-box .highlight-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--terracotta-text);
+            margin-top: 2rem;
+        }
+
+        /* =====================================================
+           MODAL DE PAUSA REFLEXIVA
+           ===================================================== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            padding: 1rem;
+            background: rgba(28, 37, 38, 0.65);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        .modal.is-open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+            max-height: calc(100dvh - 2rem);
+            overflow-y: auto;
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-vigilance);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--accent-vigilance);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.6rem;
+            color: var(--heading-color);
+        }
+
+        .close-btn {
+            margin-top: 2rem;
+            background: transparent;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        .close-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            box-shadow: none;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 1150px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                max-height: calc(100dvh - 6rem);
+                overflow-y: auto;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 1.5rem;
+                text-align: center;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-subtle);
+                box-shadow: var(--shadow-soft);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .team-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 3rem;
+            }
+
+            .solution-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+
+            .controls {
+                gap: 0.35rem;
+            }
+
+            .ctrl-btn {
+                padding: 0.45rem 0.6rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .grid-home,
+            .team-container,
+            .partners-container,
+            .blog-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-container {
+                padding: 1.25rem 1rem 3rem;
+            }
+
+            .content-header {
+                padding: 2.5rem 1rem 1rem;
+            }
+
+            .blog-content,
+            .problem-box,
+            .sol-box,
+            .prod-box,
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .blog-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .partners-support-box {
+                padding: 3rem 0.5rem;
+            }
+
+            .btn {
+                padding: 0.9rem 1.3rem;
+            }
+
+            #view-about::before {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+
+            .btn:hover,
+            .card-home:hover,
+            .blog-card:hover,
+            .blog-card:hover .blog-image img,
+            .obj-card:hover {
+                transform: none !important;
+            }
         }
     </style>
 </head>
-<body>
 
-    <nav class="navbar">
-        <a href="#" class="logo" onclick="switchView('home')">Academ<span class="logo-accent">IA.</span></a>
-        
-        <ul class="nav-links">
-            <li><a href="#" id="nav-home" class="active" onclick="switchView('home')" data-i18n="nav_home">Inicio</a></li>
-            <li><a href="#" id="nav-blog" onclick="switchView('blog')" data-i18n="nav_blog">Blog</a></li>
-            <li><a href="#" id="nav-about" onclick="switchView('about')" data-i18n="nav_about">Sobre nosotros</a></li>
-            <li><a href="#" id="nav-partners" onclick="switchView('partners')" data-i18n="nav_partners">Para Socios</a></li>
+<body>
+    <nav class="navbar" aria-label="Navegación principal" data-i18n-aria-label="nav_label">
+        <a href="#" class="logo" onclick="switchView('home'); return false;">
+            Academ<span class="logo-accent">IA.</span>
+        </a>
+
+        <ul class="nav-links" id="navigationLinks">
+            <li>
+                <a href="#" id="nav-home" class="active" aria-current="page"
+                   onclick="switchView('home'); return false;"
+                   data-i18n="nav_home">Inicio</a>
+            </li>
+            <li>
+                <a href="#" id="nav-blog"
+                   onclick="switchView('blog'); return false;"
+                   data-i18n="nav_blog">Blog</a>
+            </li>
+            <li>
+                <a href="#" id="nav-content"
+                   onclick="switchView('content'); return false;"
+                   data-i18n="nav_content">Contenido</a>
+            </li>
+            <li>
+                <a href="#" id="nav-about"
+                   onclick="switchView('about'); return false;"
+                   data-i18n="nav_about">Sobre nosotros</a>
+            </li>
+            <li>
+                <a href="#" id="nav-partners"
+                   onclick="switchView('partners'); return false;"
+                   data-i18n="nav_partners">Para Socios</a>
+            </li>
         </ul>
-        
+
         <div class="controls">
-            <button class="ctrl-btn" onclick="toggleLang()" id="langBtn">ENG</button>
-            <button class="ctrl-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
-            <button class="hamburger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            <button type="button" class="ctrl-btn" onclick="toggleLang()" id="langBtn"
+                    aria-label="Cambiar a inglés">ENG</button>
+
+            <button type="button" class="ctrl-btn" onclick="toggleTheme()" id="themeBtn"
+                    aria-label="Activar modo oscuro" aria-pressed="false">
+                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            </button>
+
+            <button type="button" class="hamburger" onclick="toggleMobileMenu()"
+                    id="menuBtn" aria-controls="navigationLinks" aria-expanded="false"
+                    aria-label="Abrir menú" data-i18n-aria-label="menu_open">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
     </nav>
 
@@ -258,22 +1194,27 @@
         <header class="hero">
             <h1 data-i18n="hero_title">¿Estás usando la IA correctamente en el salón de clases?</h1>
             <p data-i18n="hero_desc">La adopción de herramientas como ChatGPT, Gemini y Claude se ha acelerado, pero gran parte de la discusión se concentra solo en la productividad y eficiencia.</p>
-            <button class="btn" onclick="openModal()"><i class="fa-solid fa-eye"></i> <span data-i18n="hero_btn">Descubre tu perfil de usuario</span></button>
+            <button type="button" class="btn" onclick="openModal()">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                <span data-i18n="hero_btn">Descubre tu perfil de usuario</span>
+            </button>
         </header>
 
         <section class="grid-home">
-            <div class="card-home">
-                <i class="fa-solid fa-scale-unbalanced"></i>
+            <div class="card-home pillar-critical">
+                <i class="fa-solid fa-scale-unbalanced" aria-hidden="true"></i>
                 <h3 data-i18n="card1_title">¿Productividad o Dependencia?</h3>
                 <p data-i18n="card1_desc">Las IA generativas apoyan los procesos de aprendizaje e investigación diaria. Pero, ¿estamos delegando el pensamiento crítico a un algoritmo que solo predice texto?</p>
             </div>
-            <div class="card-home">
-                <i class="fa-solid fa-brain"></i>
+
+            <div class="card-home pillar-vigilance">
+                <i class="fa-solid fa-brain" aria-hidden="true"></i>
                 <h3 data-i18n="card2_title">Los Algoritmos también Alucinan</h3>
                 <p data-i18n="card2_desc">Los sistemas de IA reflejan los datos con los que fueron entrenados. ¿Sabes cómo identificar sesgos de información y evitar que se reproduzcan desigualdades en tus trabajos?</p>
             </div>
-            <div class="card-home">
-                <i class="fa-solid fa-earth-americas"></i>
+
+            <div class="card-home pillar-global">
+                <i class="fa-solid fa-earth-americas" aria-hidden="true"></i>
                 <h3 data-i18n="card3_title">Tecnología desde el Sur Global</h3>
                 <p data-i18n="card3_desc">Adoptamos acríticamente tecnologías desarrolladas en otros contextos. Necesitamos una visión Slow AI: sostenible, participativa y adaptada a la realidad mexicana.</p>
             </div>
@@ -283,9 +1224,12 @@
             <h2 data-i18n="sol_title">AcademIA - Cultura Digital</h2>
             <p data-i18n="sol_desc1">Un espacio diseñado para estudiantes y docentes universitarios. Nuestro objetivo no es prohibir la IA, sino construir una plataforma de alfabetización crítica para comprender, debatir y utilizar estas tecnologías de manera ética e informada.</p>
             <p><em data-i18n="sol_desc2">Explora mapas de alucinaciones, foros de debate y guías prácticas contra la dependencia tecnológica.</em></p>
-            <button class="btn" style="margin-top: 1.5rem;" onclick="window.open('https://forms.gle/D2N11AVbwhNE8aD4A', '_blank')">
-                <i class="fa-solid fa-flask"></i> <span data-i18n="sol_btn">Ayúdanos a construirlo (Encuesta)</span>
-            </button>
+            <a class="btn" style="margin-top: 1.5rem;"
+               href="https://forms.gle/D2N11AVbwhNE8aD4A"
+               target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                <span data-i18n="sol_btn">Ayúdanos a construirlo (Encuesta)</span>
+            </a>
         </section>
     </main>
 
@@ -295,37 +1239,162 @@
             <h1 data-i18n="blog_header_title">Recursos de Interés para Maestros sobre IA</h1>
             <p style="color: var(--text-muted);" data-i18n="blog_header_desc">Explora lecturas, seminarios y proyectos diseñados para fomentar la alfabetización crítica en las aulas.</p>
         </header>
-        
+
         <div class="blog-container">
-            <a href="https://www.straitstimes.com/multimedia/graphics/2026/04/ai-chatbots-privacy-risk/index.html" target="_blank" class="blog-card">
-                <div class="blog-image"><img src="images/straitstimes.png" alt="Straits Times Graphic"></div>
+            <a href="https://www.straitstimes.com/multimedia/graphics/2026/04/ai-chatbots-privacy-risk/index.html"
+               target="_blank" rel="noopener noreferrer" class="blog-card">
+                <div class="blog-image">
+                    <img src="images/straitstimes.png" alt="Straits Times Graphic"
+                         loading="lazy" decoding="async">
+                </div>
                 <div class="blog-content">
-                    <span class="blog-tag" data-i18n="tag_1">Cápsula periodística</span>
+                    <span class="blog-tag tag-terracotta" data-i18n="tag_1">Cápsula periodística</span>
                     <h2 data-i18n="title_1">El peligro invisible: ¿Qué pasa con tu privacidad cuando hablas con un chatbot?</h2>
                     <p data-i18n="desc_1">Cada conversación, secreto o dato personal que compartes con un chatbot de IA se queda registrado. Este especial multimedia interactivo explica de forma visual los graves riesgos de privacidad que asumimos al usar estas herramientas.</p>
-                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="blog-link">
+                        <span data-i18n="read_more">Explorar recurso</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </div>
             </a>
 
-            <a href="https://www.clacso.org/cultura-digital-y-contrahegemonia-en-la-era-de-la-inteligencia-artificial-2/" target="_blank" class="blog-card">
-                <div class="blog-image"><img src="images/clacso.png" alt="CLACSO Seminar"></div>
+            <a href="https://www.clacso.org/cultura-digital-y-contrahegemonia-en-la-era-de-la-inteligencia-artificial-2/"
+               target="_blank" rel="noopener noreferrer" class="blog-card">
+                <div class="blog-image">
+                    <img src="images/clacso.png" alt="CLACSO Seminar"
+                         loading="lazy" decoding="async">
+                </div>
                 <div class="blog-content">
-                    <span class="blog-tag" data-i18n="tag_2">Curso</span>
+                    <span class="blog-tag tag-plum" data-i18n="tag_2">Curso</span>
                     <h2 data-i18n="title_2">Cultura digital y contrahegemonía: Pensar la Inteligencia Artificial desde las ciencias sociales.</h2>
                     <p data-i18n="desc_2">¿Es posible resistir a la gobernanza algorítmica? Comparto este seminario de posgrado que analiza de forma crítica el impacto socio-técnico de la IA a través de debates sobre datificación social, plataformas y control digital.</p>
-                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="blog-link">
+                        <span data-i18n="read_more">Explorar recurso</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </div>
             </a>
 
-            <a href="https://aixdesign.co/projects/slow-ai" target="_blank" class="blog-card">
-                <div class="blog-image"><img src="images/slowai.png" alt="Slow AI Project"></div>
+            <a href="https://aixdesign.co/projects/slow-ai"
+               target="_blank" rel="noopener noreferrer" class="blog-card">
+                <div class="blog-image">
+                    <img src="images/slowai.png" alt="Slow AI Project"
+                         loading="lazy" decoding="async">
+                </div>
                 <div class="blog-content">
-                    <span class="blog-tag" data-i18n="tag_3">Proyecto</span>
+                    <span class="blog-tag tag-sage" data-i18n="tag_3">Proyecto</span>
                     <h2 data-i18n="title_3">Slow AI: Diseñando una inteligencia artificial más humana, ética y pausada.</h2>
                     <p data-i18n="desc_3">En un mundo obsesionado con la velocidad y la automatización extrema, surge "Slow AI". Este proyecto propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.</p>
-                    <div class="blog-link"><span data-i18n="read_more">Explorar recurso</span> <i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="blog-link">
+                        <span data-i18n="read_more">Explorar recurso</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </div>
             </a>
+        </div>
+    </main>
+
+    <!-- CONTENIDO / CONTENT -->
+    <!--
+        Archivos requeridos, respetando acentos y mayúsculas:
+        images/Infografía 1.jpeg
+        images/Infografía 2.jpeg
+
+        El video debe tener permisos de visualización para su audiencia.
+        Para un sitio público, pruebe el enlace de Drive sin iniciar sesión.
+    -->
+    <main id="view-content" class="view-section">
+        <header class="content-header">
+            <h1 data-i18n="content_title">Contenido</h1>
+            <p data-i18n="content_intro">Infografías y video para explorar la inteligencia artificial y la cultura digital con una mirada crítica.</p>
+        </header>
+
+        <div class="content-container">
+            <div class="content-grid">
+                <article class="content-card" aria-labelledby="infographic-openai-title">
+                    <header class="content-card-header">
+                        <span class="content-kind" data-i18n="content_infographic">Infografía</span>
+                        <h2 id="infographic-openai-title" data-i18n="content_infographic_1">La metamorfosis de OpenAI</h2>
+                    </header>
+
+                    <figure>
+                        <a class="infographic-link"
+                           href="images/Infograf%C3%ADa%201.jpeg"
+                           target="_blank" rel="noopener noreferrer">
+                            <img class="infographic-image"
+                                 src="images/Infograf%C3%ADa%201.jpeg"
+                                 alt="Infografía: La metamorfosis de OpenAI. Abrir imagen en una pestaña nueva."
+                                 data-i18n-alt="content_infographic_1_alt"
+                                 loading="lazy" decoding="async">
+                        </a>
+                        <figcaption class="content-caption">
+                            <a class="content-action"
+                               href="images/Infograf%C3%ADa%201.jpeg"
+                               target="_blank" rel="noopener noreferrer">
+                                <span data-i18n="content_open_image">Abrir imagen completa (nueva pestaña)</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </figcaption>
+                    </figure>
+                </article>
+
+                <article class="content-card content-card--data" aria-labelledby="infographic-data-title">
+                    <header class="content-card-header">
+                        <span class="content-kind" data-i18n="content_infographic">Infografía</span>
+                        <h2 id="infographic-data-title" data-i18n="content_infographic_2">Colonización de Datos</h2>
+                    </header>
+
+                    <figure>
+                        <a class="infographic-link"
+                           href="images/Infograf%C3%ADa%202.jpeg"
+                           target="_blank" rel="noopener noreferrer">
+                            <img class="infographic-image"
+                                 src="images/Infograf%C3%ADa%202.jpeg"
+                                 alt="Infografía: Colonización de Datos. Abrir imagen en una pestaña nueva."
+                                 data-i18n-alt="content_infographic_2_alt"
+                                 loading="lazy" decoding="async">
+                        </a>
+                        <figcaption class="content-caption">
+                            <a class="content-action"
+                               href="images/Infograf%C3%ADa%202.jpeg"
+                               target="_blank" rel="noopener noreferrer">
+                                <span data-i18n="content_open_image">Abrir imagen completa (nueva pestaña)</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </figcaption>
+                    </figure>
+                </article>
+            </div>
+
+            <article class="content-card content-video" aria-labelledby="content-video-title">
+                <header class="content-card-header">
+                    <span class="content-kind" data-i18n="content_video_type">Video</span>
+                    <h2 id="content-video-title" data-i18n="content_video_title">Recurso audiovisual</h2>
+                </header>
+
+                <div class="video-frame">
+                    <iframe
+                        src="https://drive.google.com/file/d/1L-qq5IWKKetTtVQsCmLIGIzhn7IkVbjL/preview"
+                        title="Reproductor de video de Google Drive"
+                        data-i18n-title="content_video_frame_title"
+                        loading="lazy"
+                        allow="fullscreen"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <div class="video-fallback">
+                    <p data-i18n="content_video_help">Si el video no se reproduce aquí, puedes abrirlo directamente en Google Drive.</p>
+                    <a class="content-action"
+                       href="https://drive.google.com/file/d/1L-qq5IWKKetTtVQsCmLIGIzhn7IkVbjL/view?usp=sharing"
+                       target="_blank" rel="noopener noreferrer">
+                        <span data-i18n="content_open_video">Ver en Google Drive (nueva pestaña)</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </article>
+
+            <p class="content-language-note" data-i18n="content_language_note">El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma del video permanecen en su versión original.</p>
         </div>
     </main>
 
@@ -338,43 +1407,50 @@
 
         <div class="team-container">
             <section class="team-card card-ana">
-                <div class="profile-img-container"><img src="images/anapau.jpeg" alt="Ana Paula Galindo Borrego"></div>
+                <div class="profile-img-container">
+                    <img src="images/anapau.jpeg" alt="Ana Paula Galindo Borrego"
+                         loading="lazy" decoding="async">
+                </div>
                 <h2>Ana Paula Galindo Borrego</h2>
-                <div class="team-role" data-i18n="ana_role">Cofundadora & Desarrollo Frontend</div>
+                <div class="team-role" data-i18n="ana_role">Cofundadora &amp; Desarrollo Frontend</div>
                 <p class="team-bio" data-i18n="ana_bio">Estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Internacionalista con especialidad en Ciencia de Datos, lidera el desarrollo frontend (HTML/JS) y el diseño de la experiencia digital (UI/UX), combinando la filosofía de la tecnología con la visualización interactiva.</p>
             </section>
 
             <section class="team-card card-abel">
-                <div class="profile-img-container"><img src="images/abel.jpeg" alt="Abel Adán Martínez Trujillo"></div>
+                <div class="profile-img-container">
+                    <img src="images/abel.jpeg" alt="Abel Adán Martínez Trujillo"
+                         loading="lazy" decoding="async">
+                </div>
                 <h2>Abel Adán Martínez Trujillo</h2>
                 <div class="team-role" data-i18n="abel_role">Creador de Contenidos Didácticos</div>
                 <p class="team-bio" data-i18n="abel_bio">Perito traductor e instructor de inglés en el Tecnológico de Monterrey y la industria maquiladora en Ciudad Juárez. Licenciado en Enseñanza del Inglés y estudiante de la Maestría en Humanidades Digitales. Implementa tecnologías críticas para optimizar la adquisición de lenguas de manera ética y personalizada.</p>
             </section>
 
             <section class="team-card card-rafa">
-                <div class="profile-img-container"><img src="images/rafael.jpeg" alt="Rafael Benítez Sandoval"></div>
+                <div class="profile-img-container">
+                    <img src="images/rafael.jpeg" alt="Rafael Benítez Sandoval"
+                         loading="lazy" decoding="async">
+                </div>
                 <h2>Rafael Benítez Sandoval</h2>
-                <div class="team-role" data-i18n="rafa_role">Diseño Conceptual & Metodológico</div>
+                <div class="team-role" data-i18n="rafa_role">Diseño Conceptual &amp; Metodológico</div>
                 <p class="team-bio" data-i18n="rafa_bio">Licenciado en Sociología, docente universitario y estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Participa en el diseño conceptual orientando la plataforma hacia la justicia digital, los sesgos algorítmicos y los desafíos éticos en contextos educativos.</p>
             </section>
         </div>
     </main>
 
-    <!-- NUEVA VISTA: PARA SOCIOS -->
+    <!-- PARA SOCIOS -->
     <main id="view-partners" class="view-section">
         <header class="partners-header">
             <h1 data-i18n="part_header_title">AcademIA – Capacitaciones de uso de inteligencia artificial en el contexto académico.</h1>
         </header>
 
         <div class="partners-container">
-            <!-- La Problemática -->
             <div class="problem-box">
                 <h2 data-i18n="part_prob_title">La problemática</h2>
                 <p data-i18n="part_prob_1">Un mundo con IA y su uso indiscriminado en el aula. ¿Cómo podemos hacer un uso ético y crítico de estas herramientas?</p>
                 <p data-i18n="part_prob_2">La presencia de la inteligencia artificial en nuestras vidas es un hecho innegable. Debemos aprender a vivir CON ella y sus consecuencias.</p>
             </div>
 
-            <!-- Objetivos Estratégicos -->
             <h2 class="section-heading" data-i18n="part_obj_title">Objetivos estratégicos</h2>
             <div class="objectives-grid">
                 <div class="obj-card">
@@ -395,13 +1471,13 @@
                 </div>
             </div>
 
-            <!-- Solución y Productos -->
             <div class="solution-wrapper">
                 <div class="sol-box">
                     <h2 data-i18n="part_sol_title">Solución</h2>
                     <p data-i18n="part_sol_1">El proyecto propone el desarrollo de un plataforma de capacitación para docentes y estudiantes que integre recursos educativos, foros de discusión y visualizaciones interactivas.</p>
                     <p data-i18n="part_sol_2">Busca reducir la brecha entre la adopción técnica de la IA y la comprensión profunda de sus implicaciones sociales y políticas en la educación superior.</p>
                 </div>
+
                 <div class="prod-box">
                     <h2 data-i18n="part_prod_title">Productos</h2>
                     <ul>
@@ -413,7 +1489,6 @@
                 </div>
             </div>
 
-            <!-- Apoyo de socios -->
             <div class="partners-support-box">
                 <h2 data-i18n="part_supp_title">Apoyo de socios formadores</h2>
                 <p data-i18n="part_supp_1">Nuestro espacio busca promover el uso crítico y ético de la inteligencia artificial para reducir los sesgos provocados por estas herramientas en usuarios que lo han llegado a usar indiscriminadamente.</p>
@@ -424,40 +1499,31 @@
     </main>
 
     <!-- MODAL GLOBAL -->
-    <div class="modal" id="interactiveModal">
+    <div class="modal" id="interactiveModal" role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle" aria-describedby="modalDescription" aria-hidden="true">
         <div class="modal-content">
-            <i class="fa-solid fa-cube" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
-            <h3 data-i18n="modal_title">¡Espera un momento!</h3>
-            <p style="margin-top: 1rem; color: var(--text-muted);" data-i18n="modal_desc">Esta plataforma orientada a la Crítica Ecosistémica está en construcción. Tu retroalimentación nos ayuda a diseñar mejores espacios.</p>
-            <button class="btn close-btn" onclick="closeModal()" data-i18n="modal_btn">Entendido</button>
+            <i class="fa-solid fa-cube modal-icon" aria-hidden="true"></i>
+            <h3 id="modalTitle" data-i18n="modal_title">¡Espera un momento!</h3>
+            <p id="modalDescription" style="margin-top: 1rem; color: var(--text-muted);" data-i18n="modal_desc">Esta plataforma orientada a la Crítica Ecosistémica está en construcción. Tu retroalimentación nos ayuda a diseñar mejores espacios.</p>
+            <button type="button" class="btn close-btn" id="modalCloseBtn"
+                    onclick="closeModal()" data-i18n="modal_btn">Entendido</button>
         </div>
     </div>
 
     <script>
-        // Función para Menú Móvil
-        function toggleMobileMenu() {
-            document.querySelector('.nav-links').classList.toggle('show');
-        }
-
-        // --- 1. Enrutador SPA ---
-        function switchView(viewName) {
-            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
-            
-            document.getElementById(`view-${viewName}`).classList.add('active');
-            if(document.getElementById(`nav-${viewName}`)) {
-                document.getElementById(`nav-${viewName}`).classList.add('active');
-            }
-            
-            document.querySelector('.nav-links').classList.remove('show');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // --- 2. Diccionario de Traducción (Actualizado con AcademIA y Partners) ---
+        // =====================================================
+        // DICCIONARIO DE TRADUCCIÓN
+        // Se conservan los textos de las secciones originales.
+        // =====================================================
         const translations = {
             es: {
                 page_title: "AcademIA | Inteligencia Artificial y Cultura Digital",
-                nav_home: "Inicio", nav_blog: "Blog", nav_about: "Sobre nosotros", nav_partners: "Para Socios",
+                nav_home: "Inicio",
+                nav_blog: "Blog",
+                nav_content: "Contenido",
+                nav_about: "Sobre nosotros",
+                nav_partners: "Para Socios",
+
                 hero_title: "¿Estás usando la IA correctamente en el salón de clases?",
                 hero_desc: "La adopción de herramientas como ChatGPT, Gemini y Claude se ha acelerado, pero gran parte de la discusión se concentra solo en la productividad y eficiencia.",
                 hero_btn: "Descubre tu perfil de usuario",
@@ -471,6 +1537,7 @@
                 sol_desc1: "Un espacio diseñado para estudiantes y docentes universitarios. Nuestro objetivo no es prohibir la IA, sino construir una plataforma de alfabetización crítica para comprender, debatir y utilizar estas tecnologías de manera ética e informada.",
                 sol_desc2: "Explora mapas de alucinaciones, foros de debate y guías prácticas contra la dependencia tecnológica.",
                 sol_btn: "Ayúdanos a construirlo (Encuesta)",
+
                 blog_header_title: "Recursos de Interés para Maestros sobre IA",
                 blog_header_desc: "Explora lecturas, seminarios y proyectos diseñados para fomentar la alfabetización crítica en las aulas.",
                 tag_1: "Cápsula periodística",
@@ -483,6 +1550,22 @@
                 title_3: "Slow AI: Diseñando una inteligencia artificial más humana, ética y pausada.",
                 desc_3: "En un mundo obsesionado con la velocidad y la automatización extrema, surge \"Slow AI\". Este proyecto propone una alternativa revolucionaria: desacelerar el desarrollo tecnológico para priorizar el cuidado, la comunidad y la sostenibilidad.",
                 read_more: "Explorar recurso",
+
+                content_title: "Contenido",
+                content_intro: "Infografías y video para explorar la inteligencia artificial y la cultura digital con una mirada crítica.",
+                content_infographic: "Infografía",
+                content_infographic_1: "La metamorfosis de OpenAI",
+                content_infographic_2: "Colonización de Datos",
+                content_infographic_1_alt: "Infografía: La metamorfosis de OpenAI. Abrir imagen en una pestaña nueva.",
+                content_infographic_2_alt: "Infografía: Colonización de Datos. Abrir imagen en una pestaña nueva.",
+                content_open_image: "Abrir imagen completa (nueva pestaña)",
+                content_video_type: "Video",
+                content_video_title: "Recurso audiovisual",
+                content_video_frame_title: "Reproductor de video de Google Drive",
+                content_video_help: "Si el video no se reproduce aquí, puedes abrirlo directamente en Google Drive.",
+                content_open_video: "Ver en Google Drive (nueva pestaña)",
+                content_language_note: "El botón de idioma traduce los títulos y las indicaciones de esta página. Los textos dentro de las infografías y el idioma del video permanecen en su versión original.",
+
                 team_header_title: "Nuestro Equipo",
                 team_header_desc: "Las mentes detrás de AcademIA.",
                 ana_role: "Cofundadora & Desarrollo Frontend",
@@ -491,8 +1574,7 @@
                 abel_bio: "Perito traductor e instructor de inglés en el Tecnológico de Monterrey y la industria maquiladora en Ciudad Juárez. Licenciado en Enseñanza del Inglés y estudiante de la Maestría en Humanidades Digitales. Implementa tecnologías críticas para optimizar la adquisición de lenguas de manera ética y personalizada.",
                 rafa_role: "Diseño Conceptual & Metodológico",
                 rafa_bio: "Licenciado en Sociología, docente universitario y estudiante de la Maestría en Humanidades Digitales del Tecnológico de Monterrey. Participa en el diseño conceptual orientando la plataforma hacia la justicia digital, los sesgos algorítmicos y los desafíos éticos en contextos educativos.",
-                
-                // Textos para Socios
+
                 part_header_title: "AcademIA – Capacitaciones de uso de inteligencia artificial en el contexto académico.",
                 part_prob_title: "La problemática",
                 part_prob_1: "Un mundo con IA y su uso indiscriminado en el aula. ¿Cómo podemos hacer un uso ético y crítico de estas herramientas?",
@@ -521,11 +1603,24 @@
 
                 modal_title: "¡Espera un momento!",
                 modal_desc: "Esta plataforma orientada a la Crítica Ecosistémica está en construcción. Tu retroalimentación nos ayuda a diseñar mejores espacios.",
-                modal_btn: "Entendido"
+                modal_btn: "Entendido",
+
+                nav_label: "Navegación principal",
+                menu_open: "Abrir menú",
+                menu_close: "Cerrar menú",
+                theme_dark: "Activar modo oscuro",
+                theme_light: "Activar modo claro",
+                language_switch: "Cambiar a inglés"
             },
+
             en: {
                 page_title: "AcademIA | AI and Digital Culture",
-                nav_home: "Home", nav_blog: "Blog", nav_about: "About us", nav_partners: "Partners",
+                nav_home: "Home",
+                nav_blog: "Blog",
+                nav_content: "Content",
+                nav_about: "About us",
+                nav_partners: "Partners",
+
                 hero_title: "Are you using AI correctly in the classroom?",
                 hero_desc: "The adoption of tools like ChatGPT, Gemini, and Claude has accelerated, but most discussions focus solely on productivity and efficiency.",
                 hero_btn: "Discover your user profile",
@@ -533,12 +1628,14 @@
                 card1_desc: "Generative AIs support daily learning and research processes. But are we delegating critical thinking to an algorithm that only predicts text?",
                 card2_title: "Algorithms Hallucinate Too",
                 card2_desc: "AI systems reflect the data they were trained on. Do you know how to identify information biases and avoid reproducing inequalities in your work?",
+                card2_title: "Algorithms Hallucinate Too",
                 card3_title: "Technology from the Global South",
                 card3_desc: "We uncritically adopt technologies developed in other contexts. We need a Slow AI vision: sustainable, participatory, and adapted to our reality.",
                 sol_title: "AcademIA - Digital Culture",
                 sol_desc1: "A space designed for students and professors. Our goal is not to ban AI, but to build a critical literacy platform to understand and use these technologies ethically.",
                 sol_desc2: "Explore hallucination maps, debate forums, and practical guides against technological dependency.",
                 sol_btn: "Help us build it (Survey)",
+
                 blog_header_title: "AI Resources of Interest for Teachers",
                 blog_header_desc: "Explore readings, seminars, and projects designed to foster critical literacy in classrooms.",
                 tag_1: "News Capsule",
@@ -551,6 +1648,22 @@
                 title_3: "Slow AI: Designing a more human, ethical, and paced artificial intelligence.",
                 desc_3: "In a world obsessed with extreme speed and automation, \"Slow AI\" emerges. This project proposes a revolutionary alternative: slowing down technology to prioritize care and community.",
                 read_more: "Explore resource",
+
+                content_title: "Content",
+                content_intro: "Infographics and video to explore artificial intelligence and digital culture through a critical lens.",
+                content_infographic: "Infographic",
+                content_infographic_1: "The Metamorphosis of OpenAI",
+                content_infographic_2: "Data Colonization",
+                content_infographic_1_alt: "Infographic: The Metamorphosis of OpenAI. Open image in a new tab.",
+                content_infographic_2_alt: "Infographic: Data Colonization. Open image in a new tab.",
+                content_open_image: "Open full image (new tab)",
+                content_video_type: "Video",
+                content_video_title: "Audiovisual Resource",
+                content_video_frame_title: "Google Drive video player",
+                content_video_help: "If the video does not play here, you can open it directly in Google Drive.",
+                content_open_video: "Watch on Google Drive (new tab)",
+                content_language_note: "The language button translates this page’s headings and instructions. Text within the infographics and the video’s language remain in their original version.",
+
                 team_header_title: "Our Team",
                 team_header_desc: "The minds behind AcademIA.",
                 ana_role: "Co-founder & Frontend Development",
@@ -559,8 +1672,7 @@
                 abel_bio: "Certified translator and English instructor at Tecnológico de Monterrey and the maquiladora industry. Bachelor's in English Teaching and Master's student in Digital Humanities.",
                 rafa_role: "Conceptual & Methodological Design",
                 rafa_bio: "Degree in Sociology, university lecturer, and Master's student in Digital Humanities at Tecnológico de Monterrey. Participates in conceptual design focusing on digital justice and algorithmic bias.",
-                
-                // Partner Texts
+
                 part_header_title: "AcademIA – Artificial intelligence usage training in the academic context.",
                 part_prob_title: "The Problem",
                 part_prob_1: "A world with AI and its indiscriminate use in the classroom. How can we make ethical and critical use of these tools?",
@@ -589,63 +1701,279 @@
 
                 modal_title: "Wait a minute!",
                 modal_desc: "This alternative platform is under active construction. Your feedback helps us design better spaces.",
-                modal_btn: "Got it"
+                modal_btn: "Got it",
+
+                nav_label: "Main navigation",
+                menu_open: "Open menu",
+                menu_close: "Close menu",
+                theme_dark: "Enable dark mode",
+                theme_light: "Enable light mode",
+                language_switch: "Switch to Spanish"
             }
         };
 
-        let currentLang = localStorage.getItem('site_lang') || 'es';
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            if(currentLang === 'en') {
-                document.getElementById('langBtn').innerText = 'ESP';
-                applyTranslations('en');
+        // =====================================================
+        // PREFERENCIAS
+        // El sitio sigue funcionando si localStorage está bloqueado.
+        // =====================================================
+        function readPreference(key, fallback) {
+            try {
+                return localStorage.getItem(key) || fallback;
+            } catch {
+                return fallback;
             }
-            if (localStorage.getItem('site_theme') === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                document.querySelector('#themeBtn i').className = 'fa-solid fa-sun';
+        }
+
+        function savePreference(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch {
+                // La preferencia sigue activa durante esta sesión.
             }
-        });
+        }
+
+        let currentLang = readPreference("site_lang", "es");
+        if (!["es", "en"].includes(currentLang)) {
+            currentLang = "es";
+        }
+
+        // =====================================================
+        // MENÚ MÓVIL
+        // =====================================================
+        function updateMenuButton() {
+            const isOpen = document.getElementById("navigationLinks").classList.contains("show");
+            const button = document.getElementById("menuBtn");
+            const key = isOpen ? "menu_close" : "menu_open";
+
+            button.setAttribute("aria-expanded", String(isOpen));
+            button.setAttribute("data-i18n-aria-label", key);
+            button.setAttribute("aria-label", translations[currentLang][key]);
+            button.querySelector("i").className =
+                isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById("navigationLinks").classList.toggle("show");
+            updateMenuButton();
+        }
+
+        function closeMobileMenu() {
+            document.getElementById("navigationLinks").classList.remove("show");
+            updateMenuButton();
+        }
+
+        // =====================================================
+        // NAVEGACIÓN ENTRE VISTAS
+        // =====================================================
+        function switchView(viewName) {
+            const target = document.getElementById(`view-${viewName}`);
+            if (!target) return;
+
+            document.querySelectorAll(".view-section").forEach(view => {
+                view.classList.remove("active");
+            });
+
+            document.querySelectorAll(".nav-links a").forEach(link => {
+                link.classList.remove("active");
+                link.removeAttribute("aria-current");
+            });
+
+            target.classList.add("active");
+
+            const activeLink = document.getElementById(`nav-${viewName}`);
+            if (activeLink) {
+                activeLink.classList.add("active");
+                activeLink.setAttribute("aria-current", "page");
+            }
+
+            closeMobileMenu();
+
+            const heading = target.querySelector("h1");
+            if (heading) {
+                heading.setAttribute("tabindex", "-1");
+                heading.focus({ preventScroll: true });
+            }
+
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({
+                top: 0,
+                behavior: reduceMotion ? "auto" : "smooth"
+            });
+        }
+
+        // =====================================================
+        // IDIOMAS
+        // =====================================================
+        function applyTranslations(lang) {
+            const dictionary = translations[lang];
+            if (!dictionary) return;
+
+            document.querySelectorAll("[data-i18n]").forEach(element => {
+                const key = element.getAttribute("data-i18n");
+
+                if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+                    element.textContent = dictionary[key];
+                }
+            });
+
+            const translatedAttributes = [
+                ["data-i18n-alt", "alt"],
+                ["data-i18n-title", "title"],
+                ["data-i18n-aria-label", "aria-label"]
+            ];
+
+            translatedAttributes.forEach(([dataAttribute, targetAttribute]) => {
+                document.querySelectorAll(`[${dataAttribute}]`).forEach(element => {
+                    const key = element.getAttribute(dataAttribute);
+
+                    if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+                        element.setAttribute(targetAttribute, dictionary[key]);
+                    }
+                });
+            });
+
+            document.documentElement.lang = lang;
+
+            const langButton = document.getElementById("langBtn");
+            langButton.textContent = lang === "es" ? "ENG" : "ESP";
+            langButton.setAttribute("aria-label", dictionary.language_switch);
+
+            updateThemeButton();
+            updateMenuButton();
+        }
 
         function toggleLang() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            localStorage.setItem('site_lang', currentLang);
-            document.getElementById('langBtn').innerText = currentLang === 'es' ? 'ENG' : 'ESP';
+            currentLang = currentLang === "es" ? "en" : "es";
+            savePreference("site_lang", currentLang);
             applyTranslations(currentLang);
         }
 
-        function applyTranslations(lang) {
-            document.querySelectorAll('[data-i18n]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n');
-                if(translations[lang][key]) {
-                    elem.innerText = translations[lang][key];
-                }
-            });
-            document.documentElement.lang = lang;
+        // =====================================================
+        // TEMA CLARO / OSCURO
+        // =====================================================
+        function updateThemeButton() {
+            const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+            const button = document.getElementById("themeBtn");
+
+            button.querySelector("i").className =
+                isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+
+            button.setAttribute("aria-pressed", String(isDark));
+            button.setAttribute(
+                "aria-label",
+                translations[currentLang][isDark ? "theme_light" : "theme_dark"]
+            );
         }
 
         function toggleTheme() {
-            const body = document.documentElement;
-            const themeBtnIcon = document.querySelector('#themeBtn i');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeBtnIcon.className = 'fa-solid fa-moon';
-                localStorage.setItem('site_theme', 'light');
+            const root = document.documentElement;
+            const isDark = root.getAttribute("data-theme") === "dark";
+
+            if (isDark) {
+                root.removeAttribute("data-theme");
+                savePreference("site_theme", "light");
             } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtnIcon.className = 'fa-solid fa-sun';
-                localStorage.setItem('site_theme', 'dark');
+                root.setAttribute("data-theme", "dark");
+                savePreference("site_theme", "dark");
+            }
+
+            updateThemeButton();
+        }
+
+        // =====================================================
+        // MODAL
+        // =====================================================
+        let previousFocus = null;
+        let previousBodyOverflow = "";
+
+        function openModal() {
+            const modal = document.getElementById("interactiveModal");
+            if (modal.classList.contains("is-open")) return;
+
+            previousFocus = document.activeElement;
+            previousBodyOverflow = document.body.style.overflow;
+
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+
+            document.getElementById("modalCloseBtn").focus();
+
+            // Evita interacción con el contenido detrás del modal.
+            document.querySelectorAll(".navbar, .view-section").forEach(element => {
+                element.inert = true;
+            });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("interactiveModal");
+            if (!modal.classList.contains("is-open")) return;
+
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = previousBodyOverflow;
+
+            document.querySelectorAll(".navbar, .view-section").forEach(element => {
+                element.inert = false;
+            });
+
+            if (previousFocus && previousFocus.isConnected) {
+                previousFocus.focus({ preventScroll: true });
             }
         }
 
-        function openModal() { document.getElementById('interactiveModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('interactiveModal').style.display = 'none'; }
-        window.onclick = function(event) {
-            let modal = document.getElementById('interactiveModal');
-            if (event.target == modal) { modal.style.display = "none"; }
+        document.getElementById("interactiveModal").addEventListener("click", event => {
+            if (event.target === event.currentTarget) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            const modal = document.getElementById("interactiveModal");
+
+            if (modal.classList.contains("is-open")) {
+                if (event.key === "Escape") {
+                    event.preventDefault();
+                    closeModal();
+                } else if (event.key === "Tab") {
+                    // El modal actual contiene un único control interactivo.
+                    event.preventDefault();
+                    document.getElementById("modalCloseBtn").focus();
+                }
+                return;
+            }
+
+            if (event.key === "Escape") {
+                const menuIsOpen =
+                    document.getElementById("navigationLinks").classList.contains("show");
+
+                if (menuIsOpen) {
+                    closeMobileMenu();
+                    document.getElementById("menuBtn").focus();
+                }
+            }
+        });
+
+        document.addEventListener("click", event => {
+            if (!event.target.closest(".navbar")) {
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 1150) {
+                closeMobileMenu();
+            }
+        });
+
+        // =====================================================
+        // INICIALIZACIÓN
+        // =====================================================
+        if (readPreference("site_theme", "light") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
         }
+
+        applyTranslations(currentLang);
     </script>
 </body>
 </html>
-
-AcademIA 
